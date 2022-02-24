@@ -36,7 +36,7 @@ function Checkout({
   update_ProductCount,
   getGuestCart,
 }) {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
   let iconWidth = {
