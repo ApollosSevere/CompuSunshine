@@ -42,8 +42,8 @@ function Checkout({
   let iconWidth = {
     1: "10%",
     2: "45%",
-    3: window.innerWidth <= 425 ? "100%" : "96%",
-    4: window.innerWidth <= 425 ? "110%" : "96%",
+    3: window.innerWidth <= 700 ? "110%" : "96%",
+    4: window.innerWidth <= 700 ? "110%" : "96%",
   };
 
   let progressWidth = {
