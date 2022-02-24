@@ -66,7 +66,7 @@ function LoginForm({ name, handleSubmit, error }) {
 function SignupForm({ name, handleSubmit, error }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* <div className="register">
         <span className="registerTitle">Register</span>
         <form name={name} onSubmit={handleSubmit} className="registerForm">
