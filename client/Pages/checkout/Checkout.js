@@ -36,7 +36,7 @@ function Checkout({
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
-  let width = { 1: "15%", 2: "45%", 3: "100%" };
+  let width = { 1: "10%", 2: "45%", 3: "100%" };
   useEffect(() => {
     checkAvailabily();
     reset_CartConflicts();
