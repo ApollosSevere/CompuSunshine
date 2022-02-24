@@ -35,6 +35,8 @@ function Cart({
     : [];
   let rowView;
 
+  console.log(userCart);
+
   const itemSubtotal = cart.reduce(function (prev, curr) {
     return prev + (curr.quantity * curr.price) / 100;
   }, 0);

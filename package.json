@@ -38,7 +38,9 @@
     "react-toastify": "^8.0.3",
     "react-widgets": "^5.8.3",
     "sequelize": "^6.3.5",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "card-validator": "^8.1.0",
+    "react-credit-cards": "^0.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

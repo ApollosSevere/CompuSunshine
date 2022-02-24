@@ -57,11 +57,11 @@
     width: 90%;
   }
   .progress-bar {
-    top: 85%;
+    top: 120%;
     left: 0px;
   }
   .icon-outer {
-    top: 72%;
+    top: 103%;
     left: 0px;
   }
   .custom-form {
@@ -134,6 +134,10 @@
   .order-detail {
     margin-top: 0;
   }
+
+  .Login {
+    margin-top: 60px;
+  }
 }
 @media (max-width: 575.98px) {
   .subscribe-head .form-section input[type="email"] {
@@ -172,12 +176,21 @@
     font-size: 17px;
   }
   .progress-bar {
-    top: 85%;
+    top: 80%;
     left: 0px;
   }
   .icon-outer {
-    top: 76%;
+    top: 70%;
     left: 0px;
+  }
+  .outer-bar {
+    width: 78%;
+  }
+  .cart-icon {
+    width: 54%;
+  }
+  .card-container {
+    margin-top: 0;
   }
 }
 @media (max-width: 400px) {

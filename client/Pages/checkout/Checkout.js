@@ -5,8 +5,12 @@ import { updateProductCount } from "../../store/products";
 import { updateOrder, fetchOrder } from "../../store/order";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { Link } from "react-router-dom";
 import "./checkout.css";
 
+import useForm from "../../components/creditCard/utils/useForm";
+
+import CreditCardForm from "../../components/creditCard/CreditCardForm.jsx";
 // import Header from "../../components/Header/Header.jsx";
 import {
   checkInventory,
@@ -32,11 +36,14 @@ function Checkout({
   update_ProductCount,
   getGuestCart,
 }) {
-  const [step, setStep] = useState([1, 2, 3]);
+  const [step, setStep] = useState([1, 2, 3, 4]);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
-  let width = { 1: "10%", 2: "45%", 3: "100%" };
+  let width = { 1: "10%", 2: "45%", 3: "100%", 4: "100%" };
+
+  const { values } = useForm();
+
   useEffect(() => {
     checkAvailabily();
     reset_CartConflicts();
@@ -50,9 +57,7 @@ function Checkout({
     checkAvailabily();
   }, [cart]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     if (canSubmit) {
       injectStyle();
 
@@ -92,11 +97,12 @@ function Checkout({
   return (
     <>
       {/* <Header /> */}
+      {console.log(window.innerWidth)}
       <div className="container parent">
-        <div className=" order-detail">
+        <div className="order-detail">
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep >= 1 && "stepCompleted"
+              currentStep == 4 && "stepCompleted"
             }`}
           >
             <div className="row ">
@@ -118,7 +124,7 @@ function Checkout({
 
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep >= 2 && "stepCompleted"
+              currentStep === 4 && "stepCompleted"
             }`}
           >
             <div className="row ">
@@ -143,7 +149,7 @@ function Checkout({
 
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep >= 3 && "stepCompleted"
+              currentStep == 4 && "stepCompleted"
             }`}
           >
             <div className="row ">
@@ -159,7 +165,7 @@ function Checkout({
                 {currentStep >= 3 && (
                   <>
                     <p>Shipping: America</p>
-                    <p>Pay method: Paypal</p>
+                    <p>Pay method: {values.cardType}</p>
                   </>
                 )}
               </div>
@@ -176,144 +182,14 @@ function Checkout({
         <div className="icon-outer">
           <div className="cart-icon">
             <i
-              style={{ left: currentStep !== 3 ? width[currentStep] : "97%" }}
+              style={{ left: currentStep >= 3 ? "99%" : width[currentStep] }}
               class="fa fa-shopping-cart icon-cart"
             ></i>
           </div>
         </div>
       </div>
 
-      <div>
-        {/* <h2>Order Summary</h2> */}
-
-        {/* {auth.id
-          ? cartInfo.userCart.map((product) => (
-              <CheckoutItem product={product} />
-            ))
-          : cartInfo.guestCart.map((product) => (
-              <CheckoutItem product={product} />
-            ))}
-        <table className="checkout">
-          <tbody>
-            <tr>
-              <th>Item Subtotal: </th>
-              <th>${itemSubtotal.toFixed(2)}</th>
-            </tr>
-            <tr>
-              <th>Shipping: </th>
-              <th>$0.00</th>
-            </tr>
-            <tr>
-              <th>Tax: </th>
-              <th>${tax}</th>
-            </tr>
-            <tr>
-              <th>Total: </th>
-              <th>${(Number(itemSubtotal) + Number(tax)).toFixed(2)}</th>
-            </tr>
-          </tbody>
-        </table> */}
-        {/* <form
-          style={{ display: "flex", flexDirection: "column" }}
-          id="checkout-form"
-          onSubmit={handleSubmit}
-        >
-          <label htmlFor="first_name">
-            <h1>First Name:</h1>
-          </label>
-          <input
-            name="first_name"
-            onChange={handleChange}
-            value={formData.first_name}
-            required
-          ></input>
-
-          <label htmlFor="last_name">
-            <h1>Last Name:</h1>
-          </label>
-          <input
-            name="last_name"
-            onChange={handleChange}
-            value={formData.last_name}
-            required
-          ></input>
-
-          <label htmlFor="email">
-            <h1>Email:</h1>
-          </label>
-          <input
-            name="email"
-            onChange={handleChange}
-            value={formData.email}
-            required
-          ></input>
-
-          <label htmlFor="address_1">
-            <h1>Address Line 1:</h1>
-          </label>
-          <input
-            name="address_1"
-            onChange={handleChange}
-            value={formData.address_1}
-            required
-          ></input>
-
-          <label htmlFor="address_2">
-            <h1>Address Line 2:</h1>
-          </label>
-          <input
-            name="address_2"
-            onChange={handleChange}
-            value={formData.address_2}
-            required
-          ></input>
-
-          <label htmlFor="city">
-            <h1>City:</h1>
-          </label>
-          <input
-            name="city"
-            onChange={handleChange}
-            value={formData.city}
-            required
-          ></input>
-
-          <label htmlFor="state">
-            <h1>State:</h1>
-          </label>
-          <input
-            name="state"
-            onChange={handleChange}
-            value={formData.state}
-            required
-          ></input>
-
-          <label htmlFor="zipcode">
-            <h1>Zipcode:</h1>
-          </label>
-          <input
-            name="zipcode"
-            onChange={handleChange}
-            value={formData.zipcode}
-            required
-          ></input>
-
-          <label htmlFor="phone">
-            <h1>Phone:</h1>
-          </label>
-          <input
-            name="phone"
-            onChange={handleChange}
-            value={formData.phone}
-            required
-          ></input>
-
-          <button type="submit">Submit</button>
-          <button type="cancel" onClick={() => history.push("/cart")}>
-            Cancel
-          </button>
-        </form> */}
-      </div>
+      {/* <div><h2>Order Summary</h2></div> */}
 
       {currentStep === 1 && (
         <div className="container d-flex justify-content-center align-items-center">
@@ -410,6 +286,83 @@ function Checkout({
           </form>
         </div>
       )}
+
+      {currentStep === 3 && <CreditCardForm setCurrentStep={setCurrentStep} />}
+
+      {currentStep === 4 && (
+        <div className="container">
+          <div className="row order-products justify-content-between">
+            <div className="col-lg-8">
+              {/* <Message variant="alert-info mt-5">Your cart is empty</Message> */}
+
+              {auth.id
+                ? cartInfo.userCart.map((product) => (
+                    <CheckoutItem product={product} />
+                  ))
+                : cartInfo.guestCart.map((product) => (
+                    <CheckoutItem product={product} />
+                  ))}
+              {/* <div className="order-product row">
+                <div className="col-md-3 col-6">
+                  <img src="/images/8.png" alt="product" />
+                </div>
+                <div className="col-md-5 col-6 d-flex align-items-center">
+                  <Link to={"/"}>
+                    <h6>Girls Nike shoes</h6>
+                  </Link>
+                </div>
+                <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
+                  <h4>QUANTITY</h4>
+                  <h6>4</h6>
+                </div>
+                <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
+                  <h4>SUBTOTAL</h4>
+                  <h6>$567</h6>
+                </div>
+              </div> */}
+            </div>
+            {/* total */}
+            <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Products</strong>
+                    </td>
+                    <td>${itemSubtotal.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Shipping</strong>
+                    </td>
+                    <td>$0.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Tax</strong>
+                    </td>
+                    <td>${tax}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Total</strong>
+                    </td>
+                    <td>${(Number(itemSubtotal) + Number(tax)).toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button type="submit" onClick={() => handleSubmit()}>
+                <Link to="/" className="text-white">
+                  PLACE ORDER
+                </Link>
+              </button>
+              {/* <div className="my-3 col-12">
+                <Message variant="alert-danger">{error}</Message>
+              </div> */}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -438,3 +391,5 @@ const mapDispatchToProps = (dispatch, { history }) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+
+// 5290990016556656
