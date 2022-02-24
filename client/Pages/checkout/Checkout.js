@@ -36,7 +36,7 @@ function Checkout({
   update_ProductCount,
   getGuestCart,
 }) {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(4);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
   let iconWidth = {
@@ -114,7 +114,7 @@ function Checkout({
         <div className="order-detail">
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep == 4 && "stepCompleted"
+              currentStep == 4 && window.innerWidth > 700 && "stepCompleted"
             }`}
           >
             <div className="row ">
@@ -136,7 +136,7 @@ function Checkout({
 
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep === 4 && "stepCompleted"
+              currentStep === 4 && window.innerWidth > 700 && "stepCompleted"
             }`}
           >
             <div className="row ">
@@ -161,7 +161,7 @@ function Checkout({
 
           <div
             className={`col-lg-4 col-sm-4 mb-lg-4 mb-5 mb-sm-0 step ${
-              currentStep == 4 && "stepCompleted"
+              currentStep == 4 && window.innerWidth > 700 && "stepCompleted"
             }`}
           >
             <div className="row ">
