@@ -36,7 +36,6 @@ function Checkout({
   update_ProductCount,
   getGuestCart,
 }) {
-  const [step, setStep] = useState([1, 2, 3, 4]);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
@@ -44,7 +43,7 @@ function Checkout({
     1: "10%",
     2: "45%",
     3: window.innerWidth <= 425 ? "100%" : "96%",
-    4: "100%",
+    4: window.innerWidth <= 425 ? "110%" : "96%",
   };
 
   let progressWidth = {
@@ -55,6 +54,7 @@ function Checkout({
   };
 
   const { values } = useForm();
+  console.log(values);
 
   useEffect(() => {
     checkAvailabily();

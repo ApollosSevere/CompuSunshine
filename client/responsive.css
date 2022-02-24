@@ -67,6 +67,9 @@
   .custom-form {
     width: 80%;
   }
+  .Login {
+    margin-top: 60px;
+  }
 }
 @media (max-width: 768px) {
   .pc-header {
