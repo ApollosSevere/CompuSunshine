@@ -369,7 +369,7 @@ function Checkout({
                 </tbody>
               </table>
               <button type="submit" onClick={() => handleSubmit()}>
-                <Link to="/" className="text-white">
+                <Link to="/home" className="text-white">
                   PLACE ORDER
                 </Link>
               </button>
