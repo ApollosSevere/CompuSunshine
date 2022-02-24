@@ -47,8 +47,8 @@ function Checkout({
   };
 
   let progressWidth = {
-    1: window.innerWidth <= 425 ? "25%" : "10%",
-    2: window.innerWidth <= 425 ? "50%" : "45%",
+    1: window.innerWidth <= 700 ? "25%" : "10%",
+    2: window.innerWidth <= 700 ? "50%" : "45%",
     3: "100%",
     4: "100%",
   };
