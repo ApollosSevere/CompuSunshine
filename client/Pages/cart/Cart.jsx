@@ -25,6 +25,7 @@ function Cart({
   removeGuestCart,
   getGuestCartBuffer,
   guestCartBuffer,
+  userCart,
   state,
 }) {
   let cart = cartInfo
