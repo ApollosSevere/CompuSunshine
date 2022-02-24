@@ -40,7 +40,19 @@ function Checkout({
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(auth);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
-  let width = { 1: "10%", 2: "45%", 3: "100%", 4: "100%" };
+  let iconWidth = {
+    1: "10%",
+    2: "45%",
+    3: window.innerWidth <= 425 ? "100%" : "96%",
+    4: "100%",
+  };
+
+  let progressWidth = {
+    1: window.innerWidth <= 425 ? "25%" : "10%",
+    2: window.innerWidth <= 425 ? "50%" : "45%",
+    3: "100%",
+    4: "100%",
+  };
 
   const { values } = useForm();
 
@@ -50,7 +62,7 @@ function Checkout({
     getCart(auth.id);
     getGuestCart();
     if (auth.id) getOrder(auth.id);
-  }, [auth]);
+  }, [auth, window.innerWidth]);
 
   useEffect(() => {
     reset_CanSubmit();
@@ -175,14 +187,19 @@ function Checkout({
 
         <div className="progress-bar">
           <div className="outer-bar">
-            <div style={{ width: width[currentStep] }} className="my-bar"></div>
+            <div
+              style={{ width: progressWidth[currentStep] }}
+              className="my-bar"
+            ></div>
           </div>
         </div>
 
         <div className="icon-outer">
           <div className="cart-icon">
             <i
-              style={{ left: currentStep >= 3 ? "99%" : width[currentStep] }}
+              style={{
+                left: iconWidth[currentStep],
+              }}
               class="fa fa-shopping-cart icon-cart"
             ></i>
           </div>
