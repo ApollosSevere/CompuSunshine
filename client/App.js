@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import Navbar from './components/Navbar'
-import Routes from './Routes'
+import Header from "./components/header/Header.jsx";
+import Routes from "./Routes";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Header /> */}
       <Routes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

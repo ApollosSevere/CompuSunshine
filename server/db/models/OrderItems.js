@@ -7,6 +7,7 @@ module.exports = db.define("orderitem", {
     primaryKey: true,
     autoIncrement: true,
   },
+  name: { type: Sequelize.STRING },
   quantity: {
     type: Sequelize.INTEGER,
   },

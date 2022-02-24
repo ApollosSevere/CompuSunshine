@@ -1,0 +1,33 @@
+.contactInfo {
+  padding: 70px 0;
+}
+.contact-Box,
+.box-info,
+.info-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box-info {
+  width: 80%;
+  flex-direction: column;
+  padding: 40px 0;
+  box-shadow: 0px 0px 27px 0px rgb(243, 243, 243);
+}
+.info-image {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #1cb803;
+  border-radius: 100px;
+  font-size: 20px;
+  color: #1cb803;
+}
+.box-info h5 {
+  font-weight: bold;
+  font-size: 19px;
+  margin-top: 20px;
+  margin-bottom: 4px;
+}
+.box-info p {
+  font-size: 16px;
+}

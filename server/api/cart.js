@@ -57,7 +57,7 @@ router.put("/:cartItem", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { productId, loggedInUser, price, productObj } = req.body;
+    const { name, productId, loggedInUser, price, productObj } = req.body;
 
     const [order, createdOrder] = await Order.findOrCreate({
       where: { userId: loggedInUser, status: "pending" },
@@ -69,6 +69,7 @@ router.post("/", async (req, res, next) => {
     const [orderItem, createdOrderItem] = await OrderItem.findOrCreate({
       where: { orderId: order.id, productId, status: "pending" },
       defaults: {
+        name,
         status: "pending",
         price,
         productId,

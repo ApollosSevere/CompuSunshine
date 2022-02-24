@@ -1,0 +1,155 @@
+.payment-container {
+  margin-top: 20px;
+}
+.radio-container {
+  padding: 10px 0;
+  text-align: start;
+}
+.radio-container input {
+  font-size: 17px;
+}
+.radio-container label {
+  padding: 0 20px;
+  font-size: 17px;
+}
+.order-detail p {
+  margin-top: 2px;
+}
+.order-detail {
+  /* padding: 10px 0; */
+  padding-top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.order-detail h5 {
+  margin-bottom: 6px;
+}
+.order-box {
+  border-radius: 100px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+.order-product {
+  margin: 40px 0;
+  border-bottom: 2px solid #f3f3f3;
+  position: relative;
+}
+.order-product h4 {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.order-product img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.stepCompleted {
+  /* background-color: #e5fee9; */
+}
+.parent {
+  position: relative;
+}
+
+.progress-bar {
+  position: absolute;
+  width: 100%;
+  top: 95%;
+  left: -10px;
+  background-color: transparent;
+}
+.icon-outer {
+  position: absolute;
+  width: 100%;
+  top: 84%;
+  left: -10px;
+  height: 10px;
+  background-color: transparent;
+}
+
+.my-bar {
+  background-color: #0f5132;
+  /* width: 15%; */
+  /* margin: 0 aut; */
+  border-radius: 5px;
+  height: 6px;
+}
+.icon-cart {
+  position: absolute;
+  /* left: 15%; */
+  width: 50px;
+  height: 50px;
+  background-color: #999;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-form {
+  width: 60%;
+}
+
+.outer-bar {
+  /* background-color: tra; */
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 3px solid #0a2c1c;
+}
+.cart-icon {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  /* border-radius: 5px;
+  border: 3px solid #0a2c1c; */
+}
+
+.step {
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 0;
+  /* width: 20%; */
+}
+
+.check-Icon {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding-left: 30px; */
+  padding-right: 0;
+}
+.text {
+  text-align: center;
+}
+.checkout-infoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding-left: 0; */
+}
+
+.table-bordered {
+  background-color: #f3f3f3;
+}
+.subtotal-order button {
+  width: 100%;
+  padding: 15px 0;
+  border: 0px;
+  text-transform: uppercase;
+  font-size: 13px;
+  background-color: #1cb803;
+  color: #ffffff;
+}

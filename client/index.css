@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: "Josefin Sans", sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  padding: 0;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: black;
+}
+i,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  padding: 0;
+  margin: 0;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 0px;
+}
+/* .row,
+.col-6,
+.col-4 {
+  margin: 0;
+  padding: 0;
+} */
+
+/* For future use */
+/* element.style {
+  background: #e5fee9;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

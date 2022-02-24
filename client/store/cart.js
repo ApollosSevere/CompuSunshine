@@ -101,10 +101,17 @@ export const update_UserCart = (cartItem, loggedInUser, task) => {
 };
 
 //THUNK
-export const addToUserCart = (productId, loggedInUser, price, productObj) => {
+export const addToUserCart = (
+  name,
+  productId,
+  loggedInUser,
+  price,
+  productObj
+) => {
   return async (dispatch) => {
     try {
       const obj = {
+        name,
         productId,
         loggedInUser,
         price,

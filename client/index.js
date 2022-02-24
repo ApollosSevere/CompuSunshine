@@ -6,6 +6,9 @@ import history from "./history";
 import store from "./store";
 import App from "./App";
 
+import "./index.css";
+import "./responsive.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

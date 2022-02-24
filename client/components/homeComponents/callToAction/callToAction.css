@@ -1,0 +1,46 @@
+.subscribe-section {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.226), rgba(0, 0, 0, 0.226)),
+    url("https://thegadgetflow.com/wp-content/uploads/2022/02/Must-have-gaming-keyboards-and-mice-to-buy-in-2022-blog-featured-1200x675.jpeg")
+      no-repeat scroll center / cover;
+  padding: 100px 0 100px;
+}
+.subscribe-head h2 {
+  color: #fff;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 30px;
+  margin: 0 0 13px;
+  text-transform: uppercase;
+}
+.subscribe-head p {
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0 0 39px;
+}
+.subscribe-head {
+  text-align: center;
+}
+.form-section input[type="email"] {
+  border: 0 none;
+  border-radius: 25px;
+  color: #9b9b9b;
+  font-size: 16px;
+  font-style: normal;
+  height: 51px;
+  letter-spacing: 0;
+  text-align: center;
+  width: 460px;
+}
+.form-section input[type="submit"] {
+  background: #1cb803;
+  border: 0 none;
+  border-radius: 25px;
+  color: #fff;
+  height: 52px;
+  letter-spacing: 0;
+  margin-left: -60px;
+  padding: 0 58px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
