@@ -5,7 +5,7 @@ import CalltoActionSection from "../../components/homeComponents/callToAction/Ca
 import ContactInfo from "../../components/homeComponents/contact/ContactInfo.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import ShopSection from "../../components/homeComponents/shopSection/ShopSection.jsx";
-import Header from "../../components/Header/Header.jsx";
+// import Header from "../../components/Header/Header.jsx";
 
 /**
  * COMPONENT
@@ -16,7 +16,7 @@ export const Home = (props) => {
 
   return (
     <div>
-      <Header canSearch={true} />
+      {/* <Header canSearch={true} /> */}
       <CalltoActionSection />
       <ShopSection />
       <ContactInfo />

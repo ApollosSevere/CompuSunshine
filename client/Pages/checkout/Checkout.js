@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import "./checkout.css";
 
-import Header from "../../components/Header/Header.jsx";
+// import Header from "../../components/Header/Header.jsx";
 import {
   checkInventory,
   resetCanSubmit,
@@ -91,7 +91,7 @@ function Checkout({
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="container parent">
         <div className=" order-detail">
           <div

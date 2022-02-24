@@ -3,12 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../../store/auth";
 import { Link } from "react-router-dom";
-import Header from "../../components/Header/Header.jsx";
+// import Header from "../../components/Header/Header.jsx";
 
 function LoginForm({ name, handleSubmit, error }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* <div className="login">
         <span className="loginTitle">Login</span>
         <form onSubmit={handleSubmit} className="registerForm" name={name}>

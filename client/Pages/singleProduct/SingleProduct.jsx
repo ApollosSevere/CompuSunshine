@@ -10,7 +10,7 @@ import "./singleProduct.css";
 
 import Rating from "../../components/homeComponents/Rating.jsx";
 import Message from "./../../components/LoadingError/Error";
-import Header from "../../components/Header/Header.jsx";
+// import Header from "../../components/Header/Header.jsx";
 
 const SingleProduct = ({
   isLoggedIn,
@@ -45,7 +45,7 @@ const SingleProduct = ({
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* <img src={product.imageUrl} />
       <h3>{product.name}</h3>
       <h4>${product.price / 100}</h4>

@@ -10,7 +10,7 @@ import {
   remove_GuestCart,
 } from "../../store/cart";
 
-import Header from "../../components/Header/Header.jsx";
+// import Header from "../../components/Header/Header.jsx";
 
 import "./cart.css";
 
@@ -106,7 +106,7 @@ function Cart({
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* {console.log(cart, "we on view")}
       <table style={{ width: "1200px", marginLeft: "60px" }}>
         <thead>
