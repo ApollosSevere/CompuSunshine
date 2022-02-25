@@ -37,9 +37,11 @@ function Cart({
 
   console.log(userCart);
 
-  const itemSubtotal = cart.reduce(function (prev, curr) {
-    return prev + (curr.quantity * curr.price) / 100;
-  }, 0);
+  const itemSubtotal =
+    cart &&
+    cart.reduce(function (prev, curr) {
+      return prev + (curr.quantity * curr.price) / 100;
+    }, 0);
   const taxRate = 0.03;
   const tax = (itemSubtotal * taxRate).toFixed(2);
 
@@ -144,7 +146,7 @@ function Cart({
         <div className=" alert alert-info text-center mt-3">
           Total Cart Products
           <Link className="text-success mx-2" to="/cart">
-            {cart.length}
+            {(cart && cart.length) || 0}
           </Link>
         </div>
         {rowView}
@@ -184,12 +186,14 @@ function Cart({
             <Link to="/" className="col-md-6 d-flex justify-content-center">
               <button>Continue To Shopping</button>
             </Link>
-            <Link
-              to="/checkout"
-              className="col-md-6 text-white d-flex justify-content-center "
-            >
-              <button>Checkout</button>
-            </Link>
+            {cart && (
+              <Link
+                to="/checkout"
+                className="col-md-6 text-white d-flex justify-content-center "
+              >
+                <button>Checkout</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

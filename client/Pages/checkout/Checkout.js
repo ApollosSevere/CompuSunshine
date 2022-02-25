@@ -368,7 +368,7 @@ function Checkout({
                   </tr>
                 </tbody>
               </table>
-              <button type="submit" onClick={() => handleSubmit()}>
+              <button type="submit" onClick={handleSubmit}>
                 <Link to="/home" className="text-white">
                   PLACE ORDER
                 </Link>
