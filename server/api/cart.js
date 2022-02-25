@@ -57,7 +57,8 @@ router.put("/:cartItem", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { name, productId, loggedInUser, price, productObj } = req.body;
+    const { name, productId, loggedInUser, price, productObj, quantity } =
+      req.body;
 
     const [order, createdOrder] = await Order.findOrCreate({
       where: { userId: loggedInUser, status: "pending" },
@@ -75,7 +76,7 @@ router.post("/", async (req, res, next) => {
         productId,
         imageUrl: productObj.imageUrl,
         orderId: order.id,
-        quantity: 1,
+        quantity,
         addedFromGuestCart: false,
       },
     });

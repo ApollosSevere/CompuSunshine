@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product, Order, OrderItem },
+  models: { Product, Review, User },
 } = require("../db");
 const { isAdmin, requireToken } = require("./middleware");
 module.exports = router;
@@ -8,7 +8,12 @@ module.exports = router;
 // Path is /api/products (GET)
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      order: [["id", "ASC"]],
+      include: {
+        model: Review,
+      },
+    });
     res.status(200).json(products);
   } catch (err) {
     next(err);
@@ -18,7 +23,9 @@ router.get("/", async (req, res, next) => {
 // Path is /api/products/:productId (GET)
 router.get("/:productId", async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.productId);
+    const product = await Product.findByPk(req.params.productId, {
+      include: { model: Review, include: { model: User } },
+    });
     res.status(200).json(product);
   } catch (err) {
     next(err);
@@ -29,6 +36,21 @@ router.post("/", requireToken, isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.send(newProduct);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/review", async (req, res, next) => {
+  try {
+    const review = req.body;
+    await Review.create(review);
+
+    const updatedProduct = await Product.findByPk(review.productId, {
+      include: { model: Review, include: { model: User } },
+    });
+
+    res.send(updatedProduct);
   } catch (error) {
     next(error);
   }

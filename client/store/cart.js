@@ -106,7 +106,8 @@ export const addToUserCart = (
   productId,
   loggedInUser,
   price,
-  productObj
+  productObj,
+  quantity
 ) => {
   return async (dispatch) => {
     try {
@@ -117,6 +118,7 @@ export const addToUserCart = (
         price,
         productObj,
         addedFromGuestCart: true,
+        quantity,
       };
       const { data: product } = await axios.post(`/api/cart/`, obj);
       dispatch(fetchCart(loggedInUser));
@@ -158,7 +160,7 @@ export const addToUserCartFromGuest = (
 /* ------------ Guest Cart Thunk Section ------------ */
 
 export const addToGuestCart =
-  ({ id, price, imageUrl, name }) =>
+  ({ id, price, imageUrl, name, amount }) =>
   () => {
     let cartItems =
       JSON.parse(localStorage.getItem("cart")) !== null
@@ -189,7 +191,7 @@ export const addToGuestCart =
         name,
         price,
         imageUrl,
-        quantity: 1,
+        quantity: amount,
       };
       cartItems = [...cartItems, newItem];
       guestCartBuffer = [...guestCartBuffer, newItem];
@@ -243,13 +245,14 @@ export const update_GuestCart = (itemId, task) => {
         : [];
 
     cartItems.map((item) => {
+      let preAmount = Number(item.quantity);
       if (Number(item.id) === Number(itemId)) {
         if (task === "subtract" && item.quantity > 1) {
-          item.quantity -= 1;
+          item.quantity = preAmount - 1;
           return item;
         }
         if (task === "add") {
-          item.quantity += 1;
+          item.quantity = preAmount + 1;
           return item;
         }
         if (task === "remove") {

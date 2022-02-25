@@ -1,0 +1,9 @@
+.rating {
+  margin-top: 20px;
+}
+
+.rating i {
+  font-size: 18px;
+  color: #ebb450;
+  margin: 0 3px;
+}

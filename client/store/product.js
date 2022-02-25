@@ -24,6 +24,21 @@ export const fetchProduct = (productId) => {
   };
 };
 
+//THUNK
+export const addReview = (review) => {
+  return async (dispatch) => {
+    try {
+      const { data: updatedProduct } = await axios.post(
+        `/api/products/review`,
+        review
+      );
+      dispatch(_setProduct(updatedProduct));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 //REDUCER
 export default function productReducer(state = {}, action) {
   switch (action.type) {

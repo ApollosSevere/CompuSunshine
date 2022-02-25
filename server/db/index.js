@@ -3,6 +3,7 @@ const Order = require("./models/Orders");
 const OrderItem = require("./models/OrderItems");
 const Product = require("./models/Products");
 const User = require("./models/User");
+const Review = require("./models/Review");
 
 const db = require("./db");
 
@@ -16,6 +17,16 @@ Product.belongsToMany(Order, { through: OrderItem });
 Order.belongsToMany(Product, { through: OrderItem });
 Order.hasMany(OrderItem);
 
+User.hasMany(Review, {
+  foreignKey: "commenter_Id",
+});
+Review.belongsTo(User, {
+  foreignKey: "commenter_Id",
+});
+
+Product.hasMany(Review);
+Review.belongsTo(Product);
+
 module.exports = {
   db,
   models: {
@@ -23,5 +34,6 @@ module.exports = {
     Product,
     OrderItem,
     Order,
+    Review,
   },
 };

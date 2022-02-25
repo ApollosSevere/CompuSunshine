@@ -31,7 +31,10 @@ function LoginForm({ name, handleSubmit, error }) {
         {error && error.response && <div> {error.response.data} </div>}
       </div> */}
 
-      <div className="container d-flex flex-column justify-content-center align-items-center login-center">
+      <div
+        style={{ paddingTop: "0" }}
+        className="container d-flex flex-column justify-content-center align-items-center login-center"
+      >
         <span className="formTitle">Login</span>
         <form
           onSubmit={handleSubmit}
@@ -92,7 +95,10 @@ function SignupForm({ name, handleSubmit, error }) {
         {error && error.response && <div> {error.response.data} </div>}
       </div> */}
 
-      <div className="container d-flex flex-column justify-content-center align-items-center login-center">
+      <div
+        style={{ paddingTop: "0" }}
+        className="container d-flex flex-column justify-content-center align-items-center login-center"
+      >
         <span className="formTitle">Register</span>
         <form
           name={name}
