@@ -62,7 +62,7 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                   <div className="dropdown-menu">
                     {isLoggedIn ? (
                       <>
-                        <Link className="dropdown-item" to="/profile">
+                        <Link className="dropdown-item" to="/myAccount">
                           Profile
                         </Link>
                         <Link onClick={handleClick} className="dropdown-item">
@@ -167,7 +167,7 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                 <div className="dropdown-menu">
                   {isLoggedIn ? (
                     <>
-                      <Link className="dropdown-item" to="/profile">
+                      <Link className="dropdown-item" to="/myAccount">
                         Profile
                       </Link>
                       <Link onClick={handleClick} className="dropdown-item">

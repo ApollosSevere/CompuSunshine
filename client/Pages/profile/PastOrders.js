@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchOrders } from "../store/orders";
+import { fetchOrders } from "../../store/orders";
 
 class PastOrders extends React.Component {
   componentDidMount() {
@@ -13,17 +13,17 @@ class PastOrders extends React.Component {
     return (
       <div>
         <h2>Past Orders</h2>
-        {orders.map(order => {
+        {orders.map((order) => {
           const itemSubtotal = order.orderitems.reduce(
             (acc, curr) => acc + (curr.price * curr.quantity) / 100,
-            0,
+            0
           );
           const tax = itemSubtotal * 0.09;
 
           return (
             <div className="past-order" key={order.id}>
               <div className="past-order-items">
-                {order.products.map(product => (
+                {order.products.map((product) => (
                   <div className="product" key={product.id}>
                     <img className="product-img" src={product.imageUrl} />
                     <h3>{product.name}</h3>
@@ -31,7 +31,10 @@ class PastOrders extends React.Component {
                     <h4>Quantity: {product.orderitem.quantity}</h4>
                     <h4>
                       Total Per Product: $
-                      {((product.price * product.orderitem.quantity) / 100).toFixed(2)}
+                      {(
+                        (product.price * product.orderitem.quantity) /
+                        100
+                      ).toFixed(2)}
                     </h4>
                   </div>
                 ))}
@@ -54,7 +57,9 @@ class PastOrders extends React.Component {
                     </tr>
                     <tr>
                       <th className="left">Total: </th>
-                      <th className="right">${(itemSubtotal + tax).toFixed(2)}</th>
+                      <th className="right">
+                        ${(itemSubtotal + tax).toFixed(2)}
+                      </th>
                     </tr>
                   </tbody>
                 </table>
@@ -67,13 +72,13 @@ class PastOrders extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   orders: state.orders,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getOrders: userId => dispatch(fetchOrders(userId)),
+const mapDispatchToProps = (dispatch) => ({
+  getOrders: (userId) => dispatch(fetchOrders(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PastOrders);

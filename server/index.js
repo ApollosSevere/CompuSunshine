@@ -8,7 +8,7 @@ const init = async () => {
     if (process.env.SEED === "true") {
       await seed();
     } else {
-      await seed({ force: true });
+      // await seed({ force: true });
       await db.sync();
     }
     // start listening (and create a 'server' object representing our server)

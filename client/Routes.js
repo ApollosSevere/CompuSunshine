@@ -14,9 +14,7 @@ import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
 
 import Checkout from "./Pages/checkout/Checkout";
-import MyAccount from "./components/MyAccount";
-import AccountInfo from "./components/AccountInfo";
-import PastOrders from "./components/PastOrders";
+import MyAccount from "./Pages/profile/MyAccount.js";
 import { ToastContainer, toast } from "react-toastify";
 
 /**
@@ -72,8 +70,8 @@ class Routes extends Component {
             )}
             <Route exact path="/products" component={AllProducts} />
             <Route path="/myAccount" component={MyAccount} />
-            <Route path="/accountInfo" component={AccountInfo} />
-            <Route path="/pastOrders" component={PastOrders} />
+            {/* <Route path="/accountInfo" component={AccountInfo} />
+            <Route path="/pastOrders" component={PastOrders} /> */}
             <Route path="/checkout" component={Checkout} />
             <Route path="/cart" component={Cart} />
             <Route path="/home" component={Home} />
