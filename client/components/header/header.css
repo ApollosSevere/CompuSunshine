@@ -14,10 +14,11 @@
 }
 /* Header */
 .header {
-  padding: 10px 0px 10px 0px;
+  /* padding: 10px 0px 10px 0px; */
+  /* height: 100px; */
 }
 .navbar-brand img {
-  width: 60%;
+  width: 30%;
 }
 .input-group {
   height: 50px;

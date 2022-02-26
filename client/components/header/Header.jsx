@@ -79,7 +79,13 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                           className="dropdown-item"
                           to="/signup"
                         >
-                          signup
+                          SignUp
+                        </Link>
+                        <Link className="dropdown-item" to="/home">
+                          Shop
+                        </Link>
+                        <Link className="dropdown-item" to="/about">
+                          About
                         </Link>
                       </>
                     )}
@@ -91,7 +97,7 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                 </Link>
               </div>
               <div className="col-12 d-flex align-items-center justify-content-evenly nav">
-                {canSearch ? (
+                {canSearch && (
                   <form className="input-group">
                     <input
                       type="search"
@@ -102,23 +108,6 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                       search
                     </button>
                   </form>
-                ) : (
-                  <>
-                    <Link
-                      style={{ fontSize: "26px", color: "#333" }}
-                      className="nav-link nav-item"
-                      to="/home"
-                    >
-                      Shop
-                    </Link>
-                    <Link
-                      style={{ fontSize: "26px", color: "#333" }}
-                      className="nav-link  nav-item"
-                      to="/about"
-                    >
-                      About
-                    </Link>
-                  </>
                 )}
               </div>
             </div>
@@ -148,14 +137,14 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
               ) : (
                 <>
                   <Link
-                    style={{ fontSize: "26px", color: "#333" }}
+                    style={{ fontSize: "22px", color: "#333" }}
                     className="nav-link nav-item"
                     to="/home"
                   >
                     Shop
                   </Link>
                   <Link
-                    style={{ fontSize: "26px", color: "#333" }}
+                    style={{ fontSize: "22px", color: "#333" }}
                     className="nav-link  nav-item"
                     to="/about"
                   >
