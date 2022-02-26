@@ -8,7 +8,7 @@ import {
   fetch_GuestCartBuffer,
   addToUserCartFromGuest,
   remove_GuestCart,
-} from "../../store/cart";
+} from "../../../store/cart";
 
 // import Header from "../../components/Header/Header.jsx";
 

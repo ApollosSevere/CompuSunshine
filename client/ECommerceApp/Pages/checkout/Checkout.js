@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import CheckoutItem from "../../components/utils/CheckoutItem";
-import { updateProductCount } from "../../store/products";
-import { updateOrder, fetchOrder } from "../../store/order";
+import { updateProductCount } from "../../../store/products";
+import { updateOrder, fetchOrder } from "../../../store/order";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ import {
   resetCartConflicts,
   fetchCart,
   fetch_GuestCart,
-} from "../../store/cart";
+} from "../../../store/cart";
 
 function Checkout({
   auth,

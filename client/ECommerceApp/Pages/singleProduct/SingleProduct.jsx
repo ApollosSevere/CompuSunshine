@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchProduct, addReview } from "../../store/product";
-import { setProduct } from "../../store/product";
+import { fetchProduct, addReview } from "../../../store/product";
 import { Link, useParams } from "react-router-dom";
-import { addToGuestCart, addToUserCart } from "../../store/cart";
-import { ToastContainer, toast } from "react-toastify";
+import { addToGuestCart, addToUserCart } from "../../../store/cart";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import "./singleProduct.css";
 import RatingSystem from "../../components/starFeature/RatingSystem.jsx";
 
 import Rating from "../../components/homeComponents/rating/Rating.jsx";
-import Message from "./../../components/LoadingError/Error";
+import Message from "../../components/LoadingError/Error";
+
 // import Header from "../../components/Header/Header.jsx";
 
 const SingleProduct = ({

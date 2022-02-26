@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { connect } from "react-redux";
-import { fetchSingleProduct, updateProduct } from "../store/adminproducts";
+import { fetchSingleProduct, updateProduct } from "../../store/adminproducts";
 
 function EditProduct({ getSingleProduct, product, updateProduct }) {
   const { productId } = useParams();

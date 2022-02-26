@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../store/products";
-import { deleteProduct, fetchAllProducts } from "../store/adminproducts";
+import { fetchProducts } from "../../store/products";
+import { deleteProduct, fetchAllProducts } from "../../store/adminproducts";
 
 class AdminProducts extends React.Component {
   async componentDidMount() {

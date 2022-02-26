@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../../store/products";
+import { fetchProducts } from "../../../../store/products";
 import { Link } from "react-router-dom";
 import Rating from "../rating/Rating.jsx";
 import Pagination from "../pagination.jsx";

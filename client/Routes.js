@@ -2,23 +2,25 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import RouteWithSubRoutes from "./utils/RouteWithSubRoutes.js";
 import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
-
-import { Login, Signup } from "./Pages/authForm/AuthForm.jsx";
-import Home from "./Pages/home/Home.jsx";
-import { me } from "./store";
-import SingleProduct from "./Pages/singleProduct/SingleProduct.jsx";
-import Cart from "./Pages/cart/Cart.jsx";
-import AdminProducts from "./components/AdminProducts";
-import AdminUsers from "./components/AdminUsers";
-import CreateProduct from "./components/CreateProduct";
-import EditProduct from "./components/EditProduct";
-import AdminApp from "./Admin/AdminApp.js";
-import ECommerceApp from "./ECommerceApp/ECommerceApp.js";
-
-import Checkout from "./Pages/checkout/Checkout";
-import MyAccount from "./Pages/profile/MyAccount.js";
 import { ToastContainer, toast } from "react-toastify";
-import NotFound from "./Pages/notFound/NotFound.js";
+
+import { me } from "./store";
+
+import ECommerceApp from "./ECommerceApp/ECommerceApp.js";
+import { Login, Signup } from "./ECommerceApp/Pages/authForm/AuthForm.jsx";
+import Home from "./ECommerceApp/Pages/home/Home.jsx";
+import SingleProduct from "./ECommerceApp/Pages/singleProduct/SingleProduct.jsx";
+import Cart from "./ECommerceApp/Pages/cart/Cart.jsx";
+import Checkout from "./ECommerceApp/Pages/checkout/Checkout.js";
+import MyAccount from "./ECommerceApp/Pages/profile/MyAccount.js";
+
+import AdminApp from "./AdminApp/AdminApp.js";
+import AdminProducts from "./AdminApp/components/AdminProducts.js";
+import AdminUsers from "./AdminApp/components/AdminUsers";
+import CreateProduct from "./AdminApp/components/CreateProduct";
+import EditProduct from "./AdminApp/components/EditProduct";
+
+import NotFound from "./utils/NotFound.js";
 
 const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
   const dynamicRoutes = !isLoggedIn

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchOrders } from "../../store/orders";
+import { fetchOrders } from "../../../store/orders";
 import { Link } from "react-router-dom";
 
 class PastOrders extends React.Component {

@@ -1,7 +1,7 @@
 import "./authForm.css";
 import React from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../../store/auth";
+import { authenticate } from "../../../store/auth";
 import { Link } from "react-router-dom";
 // import Header from "../../components/Header/Header.jsx";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { update_UserCart, update_GuestCart } from "../../../store/cart";
+import { update_UserCart, update_GuestCart } from "../../../../store/cart";
 import { Link } from "react-router-dom";
 
 import "./cartRow.css";
