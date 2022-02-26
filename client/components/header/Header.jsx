@@ -65,6 +65,21 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                         <Link className="dropdown-item" to="/myAccount">
                           Profile
                         </Link>
+                        {isAdmin && (
+                          <Link
+                            style={{ backgroundColor: "#ebb450" }}
+                            className="dropdown-item"
+                            to="/admin"
+                          >
+                            Admin Page
+                          </Link>
+                        )}
+                        <Link className="dropdown-item" to="/home">
+                          Shop
+                        </Link>
+                        <Link className="dropdown-item" to="/about">
+                          About
+                        </Link>
                         <Link onClick={handleClick} className="dropdown-item">
                           Logout
                         </Link>
@@ -173,6 +188,15 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                       <Link onClick={handleClick} className="dropdown-item">
                         Logout
                       </Link>
+                      {isAdmin && (
+                        <Link
+                          style={{ backgroundColor: "#ebb450" }}
+                          className="dropdown-item"
+                          to="/admin"
+                        >
+                          Admin Page
+                        </Link>
+                      )}
                     </>
                   ) : (
                     <>

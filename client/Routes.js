@@ -57,12 +57,13 @@ class Routes extends Component {
                   component={CreateProduct}
                 />
                 <Route exact path="/admin/users" component={AdminUsers} />
-                <Route exact path="/products" component={AllProducts} />
+                {/* <Route exact path="/products" component={AllProducts} /> */}
                 <Route path="/myAccount" component={MyAccount} />
-                <Route path="/accountInfo" component={AccountInfo} />
-                <Route path="/pastOrders" component={PastOrders} />
+                {/* <Route path="/accountInfo" component={AccountInfo} /> */}
+                {/* <Route path="/pastOrders" component={PastOrders} /> */}
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/cart" component={Cart} />
+                <Route path="/" component={Home} />
                 <Route path="/home" component={Home} />
               </Switch>
             ) : (

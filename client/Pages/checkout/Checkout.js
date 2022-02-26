@@ -84,6 +84,7 @@ function Checkout({
     }
     checkAvailabily();
     reset_CanSubmit();
+    history.push("/home");
   };
 
   const checkAvailabily = () => {
@@ -368,7 +369,11 @@ function Checkout({
                   </tr>
                 </tbody>
               </table>
-              <button type="submit" onClick={handleSubmit}>
+              <button
+                className="text-white"
+                type="submit"
+                onClick={handleSubmit}
+              >
                 <Link to="/home" className="text-white">
                   PLACE ORDER
                 </Link>
