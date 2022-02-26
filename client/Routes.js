@@ -1,108 +1,86 @@
-import React, { Component, Fragment } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import RouteWithSubRoutes from "./utils/RouteWithSubRoutes.js";
+import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
+
 import { Login, Signup } from "./Pages/authForm/AuthForm.jsx";
 import Home from "./Pages/home/Home.jsx";
 import { me } from "./store";
-import AllProducts from "./components/AllProducts";
 import SingleProduct from "./Pages/singleProduct/SingleProduct.jsx";
 import Cart from "./Pages/cart/Cart.jsx";
-import Admin from "./components/Admin";
 import AdminProducts from "./components/AdminProducts";
 import AdminUsers from "./components/AdminUsers";
 import CreateProduct from "./components/CreateProduct";
 import EditProduct from "./components/EditProduct";
+import AdminApp from "./Admin/AdminApp.js";
+import ECommerceApp from "./ECommerceApp/ECommerceApp.js";
 
 import Checkout from "./Pages/checkout/Checkout";
 import MyAccount from "./Pages/profile/MyAccount.js";
 import { ToastContainer, toast } from "react-toastify";
+import NotFound from "./Pages/notFound/NotFound.js";
 
-/**
- * COMPONENT
- */
-class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData();
-  }
+const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
+  const dynamicRoutes = !isLoggedIn
+    ? [
+        { path: "/login", component: Login },
+        { path: "/signup", component: Signup },
+      ]
+    : [];
 
-  render() {
-    const { isLoggedIn, isAdmin } = this.props;
+  const independentRoutes = [
+    { path: "/products/:productId", component: SingleProduct },
+    { path: "/myAccount", component: MyAccount },
+    { path: "/checkout", component: Checkout },
+    { path: "/cart", component: Cart },
+    { path: "/home", component: Home },
+  ];
 
-    return (
-      <div>
-        <ToastContainer />
-        {isLoggedIn ? (
-          <Switch>
-            <Route
-              exact
-              path="/products/:productId"
-              component={SingleProduct}
-            />
-            {isAdmin ? (
-              <Switch>
-                <Route exact path="/admin" component={Admin} />
-                <Route
-                  exact
-                  path="/admin/editProducts"
-                  component={AdminProducts}
-                />
-                <Route
-                  exact
-                  path="/admin/editProducts/:productId"
-                  component={EditProduct}
-                />
-                <Route
-                  exact
-                  path="/admin/createProduct"
-                  component={CreateProduct}
-                />
-                <Route exact path="/admin/users" component={AdminUsers} />
-                {/* <Route exact path="/products" component={AllProducts} /> */}
-                <Route path="/myAccount" component={MyAccount} />
-                {/* <Route path="/accountInfo" component={AccountInfo} /> */}
-                {/* <Route path="/pastOrders" component={PastOrders} /> */}
-                <Route path="/checkout" component={Checkout} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/" component={Home} />
-                <Route path="/home" component={Home} />
-              </Switch>
-            ) : (
-              console.log("on null case")
-            )}
-            <Route exact path="/products" component={AllProducts} />
-            <Route path="/myAccount" component={MyAccount} />
-            {/* <Route path="/accountInfo" component={AccountInfo} />
-            <Route path="/pastOrders" component={PastOrders} /> */}
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-            {/* <Route path="/cart" component={UserCart} /> */}
-          </Switch>
-        ) : (
-          <Switch>
-            <Route
-              exact
-              path="/products/:productId"
-              component={SingleProduct}
-            />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/checkout" component={Checkout} />
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/cart" component={Cart} />
-            <Redirect to="/" />
-          </Switch>
-        )}
-      </div>
-    );
-  }
-}
+  let routes = [
+    {
+      path: "/admin",
+      component: isAdmin ? AdminApp : NotFound,
+      routes: [
+        { path: "/admin/editProducts", component: AdminProducts },
+        { path: "/admin/editProducts/:productId", component: EditProduct },
+        { path: "/admin/createProduct", component: CreateProduct },
+        { path: "/admin/users", component: AdminUsers },
+      ],
+    },
+    {
+      path: "/",
+      component: ECommerceApp,
+      routes: [
+        ...independentRoutes,
+        ...dynamicRoutes,
+        { path: "/", component: Home },
+      ],
+    },
+  ];
 
-/**
- * CONTAINER
- */
+  useEffect(() => {
+    try {
+      loadInitialData();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  return (
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Switch>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </>
+  );
+};
+
 const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
