@@ -23,6 +23,7 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.1.1",
+    "card-validator": "^8.1.0",
     "compression": "^1.7.3",
     "css-loader": "^6.6.0",
     "express": "^4.16.4",
@@ -30,17 +31,17 @@
     "file-loader": "^6.2.0",
     "history": "^4.9.0",
     "image-webpack-loader": "^8.1.0",
+    "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "react-bootstrap": "^1.6.4",
+    "react-credit-cards": "^0.8.3",
     "react-router": "^5.2.1",
     "react-toastify": "^8.0.3",
     "react-widgets": "^5.8.3",
     "sequelize": "^6.3.5",
-    "style-loader": "^3.3.1",
-    "card-validator": "^8.1.0",
-    "react-credit-cards": "^0.8.3"
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

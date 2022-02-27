@@ -78,7 +78,7 @@ export const fetchSingleProduct = (productId) => {
   };
 };
 
-export const createProduct = (product, history) => {
+export const createProduct = (product) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -89,14 +89,13 @@ export const createProduct = (product, history) => {
       });
       const action = _createProduct(data);
       dispatch(action);
-      history.push(`/admin`);
     } catch (error) {
       console.error(error);
     }
   };
 };
 
-export const updateProduct = (productId, product, history) => {
+export const updateProduct = (productId, product) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -107,14 +106,13 @@ export const updateProduct = (productId, product, history) => {
       });
       const action = updateSingleProduct(data);
       dispatch(action);
-      history.push(`/admin/editProducts`);
     } catch (error) {
       console.error(error);
     }
   };
 };
 
-export const deleteProduct = (productId, history) => {
+export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -125,7 +123,6 @@ export const deleteProduct = (productId, history) => {
       });
       const action = _deleteProduct(data);
       dispatch(action);
-      history.push(`/admin/editProducts`);
     } catch (error) {
       console.error(error);
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { connect } from "react-redux";
 import { fetchSingleProduct, updateProduct } from "../../store/adminproducts";
+import { Link } from "react-router-dom";
 
 function EditProduct({ getSingleProduct, product, updateProduct }) {
   const { productId } = useParams();
@@ -34,64 +35,136 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
   }, []);
 
   return (
-    <form
-      style={{ width: "200", margin: "0 500px" }}
-      id="edit-product"
-      onSubmit={handleSubmit}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "200",
-          margin: "0 70px",
-        }}
-      >
-        <label htmlFor="name">Product Name: </label>
-        <input
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        ></input>
+    <>
+      <section className="content-main" style={{ maxWidth: "1200px" }}>
+        <form onSubmit={handleSubmit}>
+          <div className="content-header">
+            <Link to="/admin/products" className="btn btn-danger text-white">
+              Go to products
+            </Link>
+            <h2 className="content-title">Update Product</h2>
+            <div>
+              <button type="submit" className="btn btn-primary">
+                Publish now
+              </button>
+            </div>
+          </div>
 
-        <label htmlFor="brand">Brand: </label>
-        <input
-          name="brand"
-          value={formData.brand}
-          onChange={handleChange}
-        ></input>
+          <div className="row mb-4">
+            <div className="col-xl-8 col-lg-8">
+              <div className="card mb-4 shadow-sm">
+                <div className="card-body">
+                  <div className="mb-4">
+                    <label htmlFor="product_title" className="form-label">
+                      Product title
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_title"
+                      name="name"
+                      onChange={handleChange}
+                      value={formData.name}
+                      required
+                    />
+                  </div>
 
-        <label htmlFor="category">Category: </label>
-        <input
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        ></input>
+                  <div className="mb-4">
+                    <label htmlFor="product_title" className="form-label">
+                      Brand Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_title"
+                      name="brand"
+                      onChange={handleChange}
+                      value={formData.brand}
+                      required
+                    />
+                  </div>
 
-        <label htmlFor="price">Price (in cents): </label>
-        <input
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-        ></input>
+                  <div className="mb-4">
+                    <label htmlFor="product_title" className="form-label">
+                      Category
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_title"
+                      name="category"
+                      onChange={handleChange}
+                      value={formData.category}
+                      required
+                    />
+                  </div>
 
-        <label htmlFor="imageUrl">Image </label>
-        <input
-          name="imageUrl"
-          value={formData.imageUrl}
-          onChange={handleChange}
-        ></input>
+                  <div className="mb-4">
+                    <label htmlFor="product_price" className="form-label">
+                      Price
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_price"
+                      name="price"
+                      onChange={handleChange}
+                      value={formData.price}
+                      required
+                    />
+                  </div>
 
-        <label htmlFor="imageUrl">Quantity </label>
-        <input
-          name="quantity"
-          value={formData.quantity}
-          onChange={handleChange}
-        ></input>
-      </div>
+                  <div className="mb-4">
+                    <label htmlFor="product_price" className="form-label">
+                      Count In Stock
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Type here"
+                      className="form-control"
+                      id="product_price"
+                      name="inventory"
+                      onChange={handleChange}
+                      value={formData.quantity}
+                      required
+                    />
+                  </div>
 
-      <button type="submit">Edit</button>
-    </form>
+                  <div className="mb-4">
+                    <label className="form-label">Description</label>
+                    <textarea
+                      placeholder="Type here"
+                      className="form-control"
+                      rows="7"
+                      name="description"
+                      onChange={handleChange}
+                      value={formData.description}
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="form-label">Image Url</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Inter Image URL"
+                      name="imageUrl"
+                      onChange={handleChange}
+                      value={formData.imageUrl}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </>
   );
 }
 
@@ -103,7 +176,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { history }) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     getAllProducts: () => dispatch(fetchAllProducts()),

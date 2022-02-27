@@ -15,10 +15,11 @@ import Checkout from "./ECommerceApp/Pages/checkout/Checkout.js";
 import MyAccount from "./ECommerceApp/Pages/profile/MyAccount.js";
 
 import AdminApp from "./AdminApp/AdminApp.js";
-import AdminProducts from "./AdminApp/components/AdminProducts.js";
+import AdminProducts from "./AdminApp/pages/adminProducts/AdminProducts.js";
 import AdminUsers from "./AdminApp/components/AdminUsers";
-import CreateProduct from "./AdminApp/components/CreateProduct";
+import CreateProduct from "./AdminApp/pages/createProduct/CreateProduct";
 import EditProduct from "./AdminApp/components/EditProduct";
+import Main from "./AdminApp/components/Home/Main.js";
 
 import NotFound from "./utils/NotFound.js";
 
@@ -43,10 +44,11 @@ const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
       path: "/admin",
       component: isAdmin ? AdminApp : NotFound,
       routes: [
-        { path: "/admin/editProducts", component: AdminProducts },
-        { path: "/admin/editProducts/:productId", component: EditProduct },
+        { path: "/admin/products", component: AdminProducts },
+        { path: "/admin/edit/:productId", component: EditProduct },
         { path: "/admin/createProduct", component: CreateProduct },
         { path: "/admin/users", component: AdminUsers },
+        { path: "/", component: Main },
       ],
     },
     {
