@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import CartRow from "../../components/utils/cartRow/CartRow";
+import React, { useEffect } from "react";
+import "./cart.css";
+
+// Modules/Libraries
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+// Redux
 import {
   fetchCart,
   fetch_GuestCart,
@@ -10,39 +14,35 @@ import {
   remove_GuestCart,
 } from "../../../store/cart";
 
-// import Header from "../../components/Header/Header.jsx";
-
-import "./cart.css";
+// Components
+import CartRow from "../../components/utils/cartRow/CartRow";
 
 function Cart({
+  getCart,
   cartInfo,
+  userCart,
+  guestCart,
   isLoggedIn,
   loggedInUser,
-  getCart,
-  guestCart,
   getGuestCart,
   addToUserCart,
   removeGuestCart,
-  getGuestCartBuffer,
   guestCartBuffer,
-  userCart,
-  state,
+  getGuestCartBuffer,
 }) {
-  let cart = cartInfo
+  const cart = cartInfo
     ? loggedInUser
       ? cartInfo.userCart
       : cartInfo.guestCart
     : [];
   let rowView;
 
-  console.log(userCart);
-
+  const taxRate = 0.03;
   const itemSubtotal =
     cart &&
     cart.reduce(function (prev, curr) {
       return prev + (curr.quantity * curr.price) / 100;
     }, 0);
-  const taxRate = 0.03;
   const tax = (itemSubtotal * taxRate).toFixed(2);
 
   useEffect(() => {
@@ -89,7 +89,6 @@ function Cart({
               />
             )));
   } else {
-    console.log("should not log!!");
     rowView =
       guestCart.length === 0 ? (
         <h1 style={{ textAlign: "center" }}>Cart is Empty, ya bum!</h1>
@@ -111,61 +110,17 @@ function Cart({
 
   return (
     <>
-      {/* <Header /> */}
-      {/* {console.log(cart, "we on view")}
-      <table style={{ width: "1200px", marginLeft: "60px" }}>
-        <thead>
-          <tr>
-            <th className="product-thumbnail">Product</th>
-            <th className="product-price">Price</th>
-            <th className="product-quantity">Quantity</th>
-            <th className="product-subtotal">Total</th>
-            <th className="product-remove">Remove</th>
-          </tr>
-        </thead>
-
-        <tbody>{rowView}</tbody>
-        <Link to="/checkout">
-          <button>Checkout</button>
-        </Link>
-      </table> */}
-
       <div className="container">
-        {/* <div className=" alert alert-info text-center mt-3">
-          Your cart is empty
-          <Link
-            className="btn btn-success mx-5 px-5 py-3"
-            to="/"
-            style={{
-              fontSize: "12px",
-            }}
-          >
-            SHOPPING NOW
-          </Link>
-        </div> */}
         <div className=" alert alert-info text-center mt-3">
           Total Cart Products
           <Link className="text-success mx-2" to="/cart">
             {(cart && cart.length) || 0}
           </Link>
         </div>
-        {rowView}
-        {/* Cart */}
-        <div className="container">
-          {/* <div className=" alert alert-info text-center mt-3">
-          Your cart is empty
-          <Link
-            className="btn btn-success mx-5 px-5 py-3"
-            to="/"
-            style={{
-              fontSize: "12px",
-            }}
-          >
-            SHOPPING NOW
-          </Link>
-        </div> */}
 
-          {/* End of cart items */}
+        {rowView}
+
+        <div className="container">
           <div className="total">
             <span className="sub">shipping:</span>
             <span className="total-price">$0.00</span>
@@ -203,21 +158,21 @@ function Cart({
 
 const mapState = (state) => ({
   cartInfo: state.cart,
+  loggedInUser: state.auth.id,
+  isLoggedIn: !!state.auth.id,
   userCart: state.cart.userCart,
   guestCart: state.cart.guestCart,
   guestCartBuffer: state.cart.guestCartBuffer,
-  isLoggedIn: !!state.auth.id,
-  loggedInUser: state.auth.id,
-  state: state,
 });
 
 const mapDispatch = (dispatch) => ({
-  getCart: (loggedInUser) => dispatch(fetchCart(loggedInUser)),
   getGuestCart: () => dispatch(fetch_GuestCart()),
+  removeGuestCart: () => dispatch(remove_GuestCart()),
   getGuestCartBuffer: () => dispatch(fetch_GuestCartBuffer()),
+  getCart: (loggedInUser) => dispatch(fetchCart(loggedInUser)),
+
   addToUserCart: (id, loggedInUser, price, productObj) =>
     dispatch(addToUserCartFromGuest(id, loggedInUser, price, productObj)),
-  removeGuestCart: () => dispatch(remove_GuestCart()),
 });
 
 export default connect(mapState, mapDispatch)(Cart);

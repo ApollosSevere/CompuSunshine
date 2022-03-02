@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import { connect } from "react-redux";
-import { fetchSingleProduct, updateProduct } from "../../store/adminproducts";
-import { Link } from "react-router-dom";
 
-function EditProduct({ getSingleProduct, product, updateProduct }) {
+// Modules/Libraries
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+
+// Redux
+import {
+  fetchSingleProduct,
+  updateProduct,
+  setSingleProduct,
+} from "../../../store/adminproducts";
+
+function EditProduct({
+  product,
+  clearProduct,
+  updateProduct,
+  getSingleProduct,
+}) {
   const { productId } = useParams();
-  const [formData, setFormData] = useState(product);
+  const [formData, setFormData] = useState({});
+
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,22 +34,20 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
     }
   };
 
-  const handleChange = ({ target }) => {
-    setFormData({ ...formData, [target.name]: target.value });
-    console.log(formData);
-  };
-
   useEffect(() => {
     try {
-      setFormData(product);
+      getSingleProduct(productId);
     } catch (error) {
       console.log(error);
     }
-  }, [product]);
+    return () => {
+      clearProduct();
+    };
+  }, []);
 
   useEffect(() => {
-    getSingleProduct(productId);
-  }, []);
+    setFormData(product);
+  }, [product]);
 
   return (
     <>
@@ -44,7 +59,11 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
             </Link>
             <h2 className="content-title">Update Product</h2>
             <div>
-              <button type="submit" className="btn btn-primary">
+              <button
+                onClick={() => history.back()}
+                type="submit"
+                className="btn btn-primary"
+              >
                 Publish now
               </button>
             </div>
@@ -65,7 +84,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       id="product_title"
                       name="name"
                       onChange={handleChange}
-                      value={formData.name}
+                      value={formData.name || ""}
                       required
                     />
                   </div>
@@ -81,7 +100,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       id="product_title"
                       name="brand"
                       onChange={handleChange}
-                      value={formData.brand}
+                      value={formData.brand || ""}
                       required
                     />
                   </div>
@@ -97,7 +116,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       id="product_title"
                       name="category"
                       onChange={handleChange}
-                      value={formData.category}
+                      value={formData.category || ""}
                       required
                     />
                   </div>
@@ -113,7 +132,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       id="product_price"
                       name="price"
                       onChange={handleChange}
-                      value={formData.price}
+                      value={formData.price || ""}
                       required
                     />
                   </div>
@@ -127,9 +146,9 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       placeholder="Type here"
                       className="form-control"
                       id="product_price"
-                      name="inventory"
+                      name="quantity"
                       onChange={handleChange}
-                      value={formData.quantity}
+                      value={formData.quantity || ""}
                       required
                     />
                   </div>
@@ -142,7 +161,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       rows="7"
                       name="description"
                       onChange={handleChange}
-                      value={formData.description}
+                      value={formData.description || ""}
                       required
                     ></textarea>
                   </div>
@@ -155,7 +174,7 @@ function EditProduct({ getSingleProduct, product, updateProduct }) {
                       placeholder="Inter Image URL"
                       name="imageUrl"
                       onChange={handleChange}
-                      value={formData.imageUrl}
+                      value={formData.imageUrl || ""}
                     />
                   </div>
                 </div>
@@ -172,19 +191,18 @@ const mapStateToProps = (state) => {
   return {
     product: state.adminproducts.singleProduct,
     allProducts: state.products.allProducts,
-    state: state,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
-    getAllProducts: () => dispatch(fetchAllProducts()),
     clearProduct: () => {
       dispatch(setSingleProduct({}));
     },
     updateProduct: (id, product) =>
       dispatch(updateProduct(id, product, history)),
+    getSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+    getAllProducts: () => dispatch(fetchAllProducts()),
   };
 };
 

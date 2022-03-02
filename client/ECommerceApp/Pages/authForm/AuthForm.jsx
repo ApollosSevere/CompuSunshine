@@ -1,36 +1,16 @@
 import "./authForm.css";
 import React from "react";
+
+// Modules/Libraries
 import { connect } from "react-redux";
-import { authenticate } from "../../../store/auth";
 import { Link } from "react-router-dom";
-// import Header from "../../components/Header/Header.jsx";
+
+// Redux
+import { authenticate } from "../../../store/auth";
 
 function LoginForm({ name, handleSubmit, error }) {
   return (
     <>
-      {/* <Header /> */}
-      {/* <div className="login">
-        <span className="loginTitle">Login</span>
-        <form onSubmit={handleSubmit} className="registerForm" name={name}>
-          <label>Username</label>
-          <input
-            className="loginInput"
-            type="text"
-            placeholder="Enter your email..."
-            name="username"
-          />
-          <label>Password</label>
-          <input
-            className="loginInput"
-            type="password"
-            placeholder="Enter your password..."
-            name="password"
-          />
-          <button className="loginButton">Login</button>
-        </form>
-        {error && error.response && <div> {error.response.data} </div>}
-      </div> */}
-
       <div
         style={{ paddingTop: "0" }}
         className="container d-flex flex-column justify-content-center align-items-center login-center"
@@ -69,32 +49,6 @@ function LoginForm({ name, handleSubmit, error }) {
 function SignupForm({ name, handleSubmit, error }) {
   return (
     <>
-      {/* <Header /> */}
-      {/* <div className="register">
-        <span className="registerTitle">Register</span>
-        <form name={name} onSubmit={handleSubmit} className="registerForm">
-          <label>Username</label>
-          <input
-            name="username"
-            className="registerInput"
-            type="text"
-            placeholder="Enter your username..."
-          />
-
-          <label>Password</label>
-          <input
-            name="password"
-            className="registerInput"
-            type="password"
-            placeholder="Enter your password..."
-          />
-          <button type="submit" className="registerButton">
-            Register
-          </button>
-        </form>
-        {error && error.response && <div> {error.response.data} </div>}
-      </div> */}
-
       <div
         style={{ paddingTop: "0" }}
         className="container d-flex flex-column justify-content-center align-items-center login-center"

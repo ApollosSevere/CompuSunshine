@@ -27,6 +27,7 @@ const setAllProducts = (products) => {
 };
 
 export const setSingleProduct = (product) => {
+  console.log("on Me");
   return {
     type: SET_SINGLE_PRODUCT,
     product,

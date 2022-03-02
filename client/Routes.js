@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import RouteWithSubRoutes from "./utils/RouteWithSubRoutes.js";
 import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 import { me } from "./store";
 
@@ -16,10 +15,9 @@ import MyAccount from "./ECommerceApp/Pages/profile/MyAccount.js";
 
 import AdminApp from "./AdminApp/AdminApp.js";
 import AdminProducts from "./AdminApp/pages/adminProducts/AdminProducts.js";
-import AdminUsers from "./AdminApp/components/AdminUsers";
+import AdminUsers from "./AdminApp/pages/users/AdminUsers.js";
 import CreateProduct from "./AdminApp/pages/createProduct/CreateProduct";
-import EditProduct from "./AdminApp/components/EditProduct";
-import Main from "./AdminApp/components/Home/Main.js";
+import EditProduct from "./AdminApp/pages/editProduct/EditProduct.js";
 
 import NotFound from "./utils/NotFound.js";
 
@@ -48,7 +46,7 @@ const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
         { path: "/admin/edit/:productId", component: EditProduct },
         { path: "/admin/createProduct", component: CreateProduct },
         { path: "/admin/users", component: AdminUsers },
-        { path: "/", component: Main },
+        { path: "/", component: AdminProducts },
       ],
     },
     {
@@ -72,7 +70,6 @@ const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
 
   return (
     <>
-      <ToastContainer />
       <BrowserRouter>
         <Switch>
           {routes.map((route, i) => (

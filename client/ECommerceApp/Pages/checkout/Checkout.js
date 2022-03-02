@@ -1,17 +1,21 @@
-import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import CheckoutItem from "../../components/utils/CheckoutItem";
-import { updateProductCount } from "../../../store/products";
-import { updateOrder, fetchOrder } from "../../../store/order";
-import { toast } from "react-toastify";
-import { injectStyle } from "react-toastify/dist/inject-style";
-import { Link } from "react-router-dom";
 import "./checkout.css";
 
-import useForm from "../../components/creditCard/utils/useForm";
+// Modules/Libraries
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
+// Redux
+import { updateProductCount } from "../../../store/products";
+import { updateOrder, fetchOrder } from "../../../store/order";
+
+// Components
+import CheckoutItem from "../../components/utils/CheckoutItem";
+import useForm from "../../components/creditCard/utils/useForm";
 import CreditCardForm from "../../components/creditCard/CreditCardForm.jsx";
-// import Header from "../../components/Header/Header.jsx";
+
 import {
   checkInventory,
   resetCanSubmit,
@@ -22,23 +26,25 @@ import {
 
 function Checkout({
   auth,
-  history,
   order,
-  reset_CartConflicts,
-  reset_CanSubmit,
-  loggedInUser,
+  getCart,
+  history,
   cartInfo,
   getOrder,
-  getCart,
-  toUpdateOrder,
-  check_Inventory,
   canSubmit,
-  update_ProductCount,
   getGuestCart,
+  loggedInUser,
+  toUpdateOrder,
+  reset_CanSubmit,
+  check_Inventory,
+  reset_CartConflicts,
+  update_ProductCount,
 }) {
-  const [currentStep, setCurrentStep] = useState(1);
+  const { values } = useForm();
   const [formData, setFormData] = useState(auth);
+  const [currentStep, setCurrentStep] = useState(4);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
+
   let iconWidth = {
     1: "10%",
     2: "45%",
@@ -53,41 +59,11 @@ function Checkout({
     4: "100%",
   };
 
-  const { values } = useForm();
-  console.log(values);
-
-  useEffect(() => {
-    checkAvailabily();
-    reset_CartConflicts();
-    getCart(auth.id);
-    getGuestCart();
-    if (auth.id) getOrder(auth.id);
-  }, [auth, window.innerWidth]);
-
-  useEffect(() => {
-    reset_CanSubmit();
-    checkAvailabily();
-  }, [cart]);
-
-  const handleSubmit = () => {
-    if (canSubmit) {
-      injectStyle();
-
-      toast("Order submitted!");
-      toUpdateOrder({ ...order, status: "fullfilled" });
-      for (let index = 0; index < cart.length; index++) {
-        const orderItem = cart[index];
-        const productId = auth.id ? orderItem.productId : orderItem.id;
-        update_ProductCount(productId, orderItem.quantity);
-      }
-      !loggedInUser && localStorage.removeItem("cart");
-    }
-    checkAvailabily();
-    reset_CanSubmit();
-    history.push("/home");
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const checkAvailabily = () => {
+  const checkAvailability = () => {
     if (cart.length > 0) {
       for (let index = 0; index < cart.length; index++) {
         const orderItem = cart[index];
@@ -97,20 +73,47 @@ function Checkout({
     }
   };
 
-  const handleChange = ({ target }) => {
-    setFormData({ ...formData, [target.name]: target.value });
+  useEffect(() => {
+    reset_CanSubmit();
+    checkAvailability();
+  }, [cart]);
+
+  useEffect(() => {
+    checkAvailability();
+    reset_CartConflicts();
+    getCart(auth.id);
+    getGuestCart();
+    if (auth.id) getOrder(auth.id);
+  }, [auth, window.innerWidth]);
+
+  const handleSubmit = () => {
+    injectStyle();
+
+    if (canSubmit) {
+      toUpdateOrder({ ...order, status: "fullfilled" });
+      for (let index = 0; index < cart.length; index++) {
+        const orderItem = cart[index];
+        const productId = auth.id ? orderItem.productId : orderItem.id;
+        update_ProductCount(productId, orderItem.quantity);
+      }
+      !loggedInUser && localStorage.removeItem("cart");
+      toast("Order submitted!");
+      history.push("/home");
+    }
+
+    toast("Cannot complete order: Insufficient quantity");
+    checkAvailability();
+    reset_CanSubmit();
   };
 
+  const taxRate = 0.09;
   const itemSubtotal = cart.reduce(function (prev, curr) {
     return prev + (curr.quantity * curr.price) / 100;
   }, 0);
-  const taxRate = 0.09;
   const tax = (itemSubtotal * taxRate).toFixed(2);
 
   return (
     <>
-      {/* <Header /> */}
-      {console.log(window.innerWidth)}
       <div className="container parent">
         <div className="order-detail">
           <div
@@ -206,8 +209,6 @@ function Checkout({
           </div>
         </div>
       </div>
-
-      {/* <div><h2>Order Summary</h2></div> */}
 
       {currentStep === 1 && (
         <div className="container d-flex justify-content-center align-items-center">
@@ -311,8 +312,6 @@ function Checkout({
         <div className="container">
           <div className="row order-products justify-content-between">
             <div className="col-lg-8">
-              {/* <Message variant="alert-info mt-5">Your cart is empty</Message> */}
-
               {auth.id
                 ? cartInfo.userCart.map((product) => (
                     <CheckoutItem product={product} />
@@ -320,26 +319,8 @@ function Checkout({
                 : cartInfo.guestCart.map((product) => (
                     <CheckoutItem product={product} />
                   ))}
-              {/* <div className="order-product row">
-                <div className="col-md-3 col-6">
-                  <img src="/images/8.png" alt="product" />
-                </div>
-                <div className="col-md-5 col-6 d-flex align-items-center">
-                  <Link to={"/"}>
-                    <h6>Girls Nike shoes</h6>
-                  </Link>
-                </div>
-                <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
-                  <h4>QUANTITY</h4>
-                  <h6>4</h6>
-                </div>
-                <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
-                  <h4>SUBTOTAL</h4>
-                  <h6>$567</h6>
-                </div>
-              </div> */}
             </div>
-            {/* total */}
+
             <div className="col-lg-3 d-flex align-items-end flex-column mt-5 subtotal-order">
               <table className="table table-bordered">
                 <tbody>
@@ -374,13 +355,20 @@ function Checkout({
                 type="submit"
                 onClick={handleSubmit}
               >
-                <Link to="/home" className="text-white">
+                <Link to={canSubmit ? "/home" : "#"} className="text-white">
                   PLACE ORDER
                 </Link>
               </button>
-              {/* <div className="my-3 col-12">
-                <Message variant="alert-danger">{error}</Message>
-              </div> */}
+              <hr />
+              {!canSubmit && (
+                <button
+                  style={{ backgroundColor: "black" }}
+                  type="cancel"
+                  onClick={() => history.push("/cart")}
+                >
+                  Go back
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -392,24 +380,26 @@ function Checkout({
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    loggedInUser: state.auth.id,
-    cartInfo: state.cart,
     order: state.order,
+    cartInfo: state.cart,
+    loggedInUser: state.auth.id,
     canSubmit: state.cart.canSubmit,
   };
 };
 
 const mapDispatchToProps = (dispatch, { history }) => ({
-  toUpdateOrder: (order) => dispatch(updateOrder(order)),
-  getOrder: (userId) => dispatch(fetchOrder(userId)),
-  check_Inventory: (productId, cartItemAmount, cartItemId) =>
-    dispatch(checkInventory(productId, cartItemAmount, cartItemId)),
-  update_ProductCount: (productId, cartItemAmount) =>
-    dispatch(updateProductCount(productId, cartItemAmount)),
+  getGuestCart: () => dispatch(fetch_GuestCart()),
   reset_CanSubmit: () => dispatch(resetCanSubmit()),
+  getOrder: (userId) => dispatch(fetchOrder(userId)),
+  toUpdateOrder: (order) => dispatch(updateOrder(order)),
   reset_CartConflicts: () => dispatch(resetCartConflicts()),
   getCart: (loggedInUser) => dispatch(fetchCart(loggedInUser)),
-  getGuestCart: () => dispatch(fetch_GuestCart()),
+
+  update_ProductCount: (productId, cartItemAmount) =>
+    dispatch(updateProductCount(productId, cartItemAmount)),
+
+  check_Inventory: (productId, cartItemAmount, cartItemId) =>
+    dispatch(checkInventory(productId, cartItemAmount, cartItemId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

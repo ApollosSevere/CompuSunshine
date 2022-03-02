@@ -1,13 +1,82 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "./products.css";
+
+// Modules/Libraries
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../../../store/products";
+
+// Redux
 import { deleteProduct, fetchAllProducts } from "../../../store/adminproducts";
 
-import "./products.css";
-const Product = (props) => {
-  const { product, deleteProduct } = props;
+function AdminProducts({ loadAllProducts, products, removeProduct }) {
+  useEffect(() => {
+    try {
+      loadAllProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  return (
+    <>
+      <section className="content-main">
+        <div className="content-header">
+          <h2 className="content-title">Products</h2>
+          <div>
+            <Link to="/admin/createProduct" className="btn btn-primary">
+              Create new
+            </Link>
+          </div>
+        </div>
 
+        <div className="card mb-4 shadow-sm">
+          <div className="card-body">
+            <div className="row">
+              {products.map((product) => (
+                <Product
+                  product={product}
+                  removeProduct={removeProduct}
+                  key={product.id}
+                />
+              ))}
+            </div>
+
+            <nav className="float-end mt-4" aria-label="Page navigation">
+              <ul className="pagination">
+                <li className="page-item disabled">
+                  <Link className="page-link" to="#">
+                    Previous
+                  </Link>
+                </li>
+                <li className="page-item active">
+                  <Link className="page-link" to="#">
+                    1
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    2
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    3
+                  </Link>
+                </li>
+                <li className="page-item">
+                  <Link className="page-link" to="#">
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+const Product = ({ product, removeProduct }) => {
   return (
     <>
       <div className="col-md-6 col-sm-6 col-lg-3 mb-5">
@@ -30,7 +99,7 @@ const Product = (props) => {
               <Link
                 to="#"
                 className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-6"
-                onClick={() => deleteProduct(product.id)}
+                onClick={() => removeProduct(product.id)}
               >
                 <i className="fas fa-trash-alt"></i>
               </Link>
@@ -41,104 +110,6 @@ const Product = (props) => {
     </>
   );
 };
-
-class AdminProducts extends React.Component {
-  async componentDidMount() {
-    this.props.loadAllProducts();
-  }
-
-  render() {
-    // *Important: Sort products first to keep from reshifting after a change!
-    this.props.products.sort((itemA, itemB) => itemA.id - itemB.id);
-
-    return (
-      <>
-        <section className="content-main">
-          <div className="content-header">
-            <h2 className="content-title">Products</h2>
-            <div>
-              <Link to="/admin/createProduct" className="btn btn-primary">
-                Create new
-              </Link>
-            </div>
-          </div>
-
-          <div className="card mb-4 shadow-sm">
-            <header className="card-header bg-white ">
-              <div className="row gx-3 py-3">
-                <div className="col-lg-4 col-md-6 me-auto ">
-                  <input
-                    type="search"
-                    placeholder="Search..."
-                    className="form-control p-2"
-                  />
-                </div>
-                <div className="col-lg-2 col-6 col-md-3">
-                  <select className="form-select">
-                    <option>All category</option>
-                    <option>Electronics</option>
-                    <option>Clothings</option>
-                    <option>Something else</option>
-                  </select>
-                </div>
-                <div className="col-lg-2 col-6 col-md-3">
-                  <select className="form-select">
-                    <option>Latest added</option>
-                    <option>Cheap first</option>
-                    <option>Most viewed</option>
-                  </select>
-                </div>
-              </div>
-            </header>
-
-            <div className="card-body">
-              <div className="row">
-                {/* Products */}
-                {this.props.products.map((product) => (
-                  <Product
-                    product={product}
-                    deleteProduct={this.props.deleteProduct}
-                    key={product._id}
-                  />
-                ))}
-              </div>
-
-              <nav className="float-end mt-4" aria-label="Page navigation">
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <Link className="page-link" to="#">
-                      Previous
-                    </Link>
-                  </li>
-                  <li className="page-item active">
-                    <Link className="page-link" to="#">
-                      1
-                    </Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to="#">
-                      2
-                    </Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to="#">
-                      3
-                    </Link>
-                  </li>
-                  <li className="page-item">
-                    <Link className="page-link" to="#">
-                      Next
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -152,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
     loadAllProducts: () => {
       dispatch(fetchAllProducts());
     },
-    deleteProduct: (productId) => {
+    removeProduct: (productId) => {
       dispatch(deleteProduct(productId));
     },
   };

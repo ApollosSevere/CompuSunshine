@@ -1,11 +1,13 @@
 import React from "react";
-import useForm from "./utils/useForm";
-import { Button, Form, Alert, Row, Col } from "react-bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "./CreditCardForm.css";
 
+// Modules/Libraries
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
+
+// Components
+import useForm from "./utils/useForm";
+import { Button, Alert } from "react-bootstrap";
 
 const CreditCardForm = ({ setCurrentStep }) => {
   const { handleChange, handleFocus, validate, values, errors } = useForm();
@@ -13,7 +15,6 @@ const CreditCardForm = ({ setCurrentStep }) => {
   const handleSubmission = async (e) => {
     e.preventDefault();
     let { variant } = validate();
-    console.log(variant);
     variant === "success" && setCurrentStep(4);
   };
 
@@ -63,18 +64,6 @@ const CreditCardForm = ({ setCurrentStep }) => {
                 isValid={errors.cnumber}
               />
 
-              {/* <input
-                type="text"
-                name="cardType"
-                id="cardType"
-                data-testid="cardType"
-                placeholder="Card Type"
-                value={values.cardType}
-                onChange={handleChange}
-                onFocus={handleFocus}
-                isValid={errors.ctype}
-              ></input> */}
-
               <div className="d-flex gap-4 align-items-center">
                 <input
                   type="text"
@@ -100,23 +89,6 @@ const CreditCardForm = ({ setCurrentStep }) => {
                   isValid={errors.ccvv}
                 ></input>
               </div>
-
-              {/* <input
-                type="text"
-                id="cardPostalCode"
-                data-testid="cardPostalCode"
-                name="cardPostalCode"
-                placeholder="Postal Code"
-                value={values.cardPostalCode}
-                onChange={handleChange}
-                onFocus={handleFocus}
-                isValid={errors.cpostal}
-              ></input> */}
-              {/* 
-              <button type="submit">Next</button>
-              <button type="cancel" onClick={() => history.push("/cart")}>
-                Cancel
-              </button> */}
 
               <Button
                 size={"block"}

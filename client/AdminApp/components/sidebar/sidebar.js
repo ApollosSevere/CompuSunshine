@@ -27,17 +27,6 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/admin"
-                exact={true}
-              >
-                <i className="icon fas fa-home"></i>
-                <span className="text">Dashboard</span>
-              </NavLink>
-            </li>
-            <li className="menu-item">
-              <NavLink
-                activeClassName="active"
-                className="menu-link"
                 to="/admin/products"
               >
                 <i className="icon fas fa-shopping-bag"></i>

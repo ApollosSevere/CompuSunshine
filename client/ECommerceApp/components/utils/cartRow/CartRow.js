@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import "./cartRow.css";
+
+// Modules/Libraries
 import { connect } from "react-redux";
-import { update_UserCart, update_GuestCart } from "../../../../store/cart";
 import { Link } from "react-router-dom";
 
-import "./cartRow.css";
+// Redux
+import { update_UserCart, update_GuestCart } from "../../../../store/cart";
 
 function CartRow({
   id,
@@ -18,7 +21,6 @@ function CartRow({
 }) {
   const handleClick = (task) => {
     if (!guestUser) {
-      console.log(id, loggedInUser, task);
       updateUserCart(id, loggedInUser, task);
     } else if (guestUser) {
       updateGuestCart(id, task);
@@ -27,25 +29,7 @@ function CartRow({
 
   return (
     <>
-      {/* {console.log(imageUrl)} */}
-      {/* <td>
-        <h3>{name}</h3>
-        <img src={imageUrl} alt="wassGud!" />
-      </td>
-      <td>${price / 100}</td>
-      <td>
-        <button onClick={() => handleClick("subtract")}>-</button>
-        {quantity}
-        <button onClick={() => handleClick("add")}>+</button>
-      </td>
-      <td>${(quantity * price) / 100}</td>
-      <td>
-        <button onClick={() => handleClick("remove")}>X delete</button>
-      </td> */}
-
-      {/* cartiterm */}
       <div className="cart-iterm row">
-        {console.log(name, guestUser)}
         <div
           onClick={() => handleClick("remove")}
           className="remove-button d-flex justify-content-center align-items-center"
@@ -62,11 +46,7 @@ function CartRow({
         </div>
         <div className="cart-qty col-md-2 col-sm-5  d-flex align-items-center  flex-column justify-content-center ">
           <h6>QUANTITY</h6>
-          {/* <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select> */}
+
           <div className="d-flex adjust flex-row justify-content-center">
             <button
               className="btn-subtract"

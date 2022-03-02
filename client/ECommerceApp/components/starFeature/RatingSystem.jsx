@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import EmptyStar from "./assets/empty-star.svg";
-// import FilledStar from "./assets/filled-star.svg";
 import "./rating.css";
+
 const RatingSystem = ({ NumOfStars, rating, setRating }) => {
   const [stars, setStars] = useState([]);
   const [hovered, setHovered] = useState(0);
-
-  // "fas fa-star"
-  //           : value >= 1.5
-  //           ? "fas fa-star-half-alt"
-  //           : "far fa-star"
 
   useEffect(() => {
     let starCount = NumOfStars || 5;
@@ -33,17 +27,13 @@ const RatingSystem = ({ NumOfStars, rating, setRating }) => {
     */
     return rating < star ? (
       hovered < star ? (
-        // <img src={EmptyStar} alt="empty star" />
         <i class="far fa-star "></i>
       ) : (
-        // <img src={FilledStar} alt="empty star" />
         <i class="fas fa-star "></i>
       )
     ) : hovered < star && hovered != 0 ? (
-      // <img src={EmptyStar} alt="empty star" />
       <i class="far fa-star"></i>
     ) : (
-      // <img src={FilledStar} alt="empty star" />
       <i class="fas fa-star "></i>
     );
   };

@@ -1,13 +1,15 @@
 import React from "react";
+import "./header.css";
+
+// Modules/Libraries
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../../../store";
 
-import "./header.css";
+// Redux
+import { logout } from "../../../store";
 
 const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
   <div>
-    {/* Top Header */}
     <div className="Announcement ">
       <div className="container">
         <div className="row">
@@ -36,7 +38,6 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
       </div>
     </div>
 
-    {/* {isLoggedIn ? ( */}
     <div className="header">
       <div className="container">
         {/* MOBILE HEADER */}
@@ -227,9 +228,6 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
   </div>
 );
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,

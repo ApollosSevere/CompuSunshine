@@ -6,6 +6,7 @@ import { addToGuestCart, addToUserCart } from "../../../store/cart";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import "./singleProduct.css";
 import RatingSystem from "../../components/starFeature/RatingSystem.jsx";
+import { toast } from "react-toastify";
 
 import Rating from "../../components/homeComponents/rating/Rating.jsx";
 import Message from "../../components/LoadingError/Error";
@@ -124,7 +125,7 @@ const SingleProduct = ({
               <div className="product-count col-lg-7 ">
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Price</h6>
-                  <span>${product.price}</span>
+                  <span>${product.price / 100}</span>
                 </div>
                 <div className="flex-box d-flex justify-content-between align-items-center">
                   <h6>Status</h6>

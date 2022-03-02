@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
+import "./shopSection.css";
+
+// Modules/Libraries
 import { connect } from "react-redux";
-import { fetchProducts } from "../../../../store/products";
 import { Link } from "react-router-dom";
+
+// Redux
+import { fetchProducts } from "../../../../store/products";
+
+// Utils/Components
 import Rating from "../rating/Rating.jsx";
 import Pagination from "../pagination.jsx";
 
-import "./shopSection.css";
-
-function ShopSection({ getProducts, products, state }) {
+function ShopSection({ getProducts, products }) {
   useEffect(() => {
     try {
       getProducts();
@@ -15,6 +20,7 @@ function ShopSection({ getProducts, products, state }) {
       console.log(error);
     }
   }, []);
+
   return (
     <>
       <div className="container">
@@ -89,7 +95,6 @@ function ShopSection({ getProducts, products, state }) {
 
 const mapState = (state) => ({
   products: state.products,
-  state: state,
 });
 
 const mapDispatch = (dispatch) => ({

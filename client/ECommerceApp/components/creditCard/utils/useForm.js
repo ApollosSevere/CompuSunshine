@@ -30,8 +30,6 @@ const useForm = () => {
   };
 
   const validate = () => {
-    console.log("--------Validating!!1---------");
-
     let errorsInfo = validateInfo(values);
     setErrors(errorsInfo);
     return errorsInfo;

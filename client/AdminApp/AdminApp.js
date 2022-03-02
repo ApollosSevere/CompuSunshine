@@ -1,8 +1,12 @@
 import React from "react";
-import { Switch, Link } from "react-router-dom";
-import RouteWithSubRoutes from "../utils/RouteWithSubRoutes";
 import "./responsive.css";
 import "./admin.css";
+
+// Modules/Libraries
+import { Switch } from "react-router-dom";
+import RouteWithSubRoutes from "../utils/RouteWithSubRoutes";
+
+// Components
 import Header from "./components/header/Header";
 import Sidebar from "./components/sidebar/sidebar";
 

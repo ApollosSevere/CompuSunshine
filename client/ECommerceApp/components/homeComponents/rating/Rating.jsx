@@ -1,5 +1,6 @@
 import React from "react";
 import "./rating.css";
+
 const Rating = ({ value, text }) => {
   return (
     <div className="review-rating">
