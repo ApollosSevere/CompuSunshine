@@ -2,11 +2,10 @@ const router = require("express").Router();
 const {
   models: { User },
 } = require("../db");
-const { requireToken } = require("./middleware");
+const { requireToken, isAdmin } = require("./middleware");
 module.exports = router;
 
-// Path is /api/user/:userId
-router.put("/:userId", async (req, res, next) => {
+router.put("/:userId", requireToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     await user.update(req.body);

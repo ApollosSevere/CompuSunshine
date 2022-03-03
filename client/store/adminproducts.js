@@ -27,7 +27,6 @@ const setAllProducts = (products) => {
 };
 
 export const setSingleProduct = (product) => {
-  console.log("on Me");
   return {
     type: SET_SINGLE_PRODUCT,
     product,
@@ -62,7 +61,7 @@ export const fetchAllProducts = () => {
   return async (dispatch) => {
     try {
       const { data: products } = await axios.get("/api/products");
-      console.log("hey", products);
+
       dispatch(setAllProducts(products));
     } catch (error) {
       console.log(error);
@@ -73,7 +72,6 @@ export const fetchAllProducts = () => {
 export const fetchSingleProduct = (productId) => {
   return async (dispatch) => {
     const { data: product } = await axios.get(`/api/products/${productId}`);
-    console.log(product, "Store level");
     const action = setSingleProduct(product);
     dispatch(action);
   };
@@ -129,6 +127,7 @@ export const deleteProduct = (productId) => {
     }
   };
 };
+
 /**
  * REDUCER
  */

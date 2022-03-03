@@ -2,10 +2,8 @@ const router = require("express").Router();
 const {
   models: { Order, OrderItem, Product },
 } = require("../db");
-const { requireToken } = require("./middleware");
 module.exports = router;
 
-// Path is /api/orders (GET)
 router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll();
@@ -15,7 +13,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// Path is /api/orders/:userId (GET)
 router.get("/:userId", async (req, res, next) => {
   try {
     const order = await Order.findOne({
@@ -31,7 +28,6 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// Path is /api/orders/:userId/pastOrders (GET)
 router.get("/:userId/pastOrders", async (req, res, next) => {
   try {
     const orders = await Order.findAll({
@@ -47,12 +43,8 @@ router.get("/:userId/pastOrders", async (req, res, next) => {
   }
 });
 
-// Path is /api/orders/:orderId (GET)
 router.put("/:orderId", async (req, res, next) => {
   try {
-    // const order = await Order.findByPk(req.params.orderId, {
-    //   include: OrderItem,
-    // });
     const [order, orderCreated] = await Order.findOrCreate({
       where: {
         id: req.params.orderId,

@@ -30,8 +30,6 @@ export const updateProductCount = (productId, cartItemAmount) => {
         `/api/products/updatecount/${productId}`,
         { cartItemAmount }
       );
-      // dispatch(_setProducts(products));
-      console.log("updated Product: ", product);
     } catch (error) {
       console.log(error);
     }

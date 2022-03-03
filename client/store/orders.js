@@ -1,10 +1,13 @@
 import axios from "axios";
 
+const TOKEN = "token";
+const token = window.localStorage.getItem(TOKEN);
+
 //ACTION
 const SET_ORDERS = "SET_ORDERS";
 
 //ACTION CREATOR
-export const _setOrders = orders => {
+export const _setOrders = (orders) => {
   return {
     type: SET_ORDERS,
     orders,
@@ -12,10 +15,17 @@ export const _setOrders = orders => {
 };
 
 //THUNK
-export const fetchOrders = userId => {
-  return async dispatch => {
+export const fetchOrders = (userId) => {
+  return async (dispatch) => {
     try {
-      const { data: orders } = await axios.get(`/api/orders/${userId}/pastOrders`);
+      const { data: orders } = await axios.get(
+        `/api/orders/${userId}/pastOrders`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       dispatch(_setOrders(orders));
     } catch (error) {
       console.log(error);

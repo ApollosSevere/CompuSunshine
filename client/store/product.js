@@ -2,7 +2,6 @@ import axios from "axios";
 
 //ACTION
 const SET_PRODUCT = "SET_PRODUCT";
-// const ADD_PRODUCT = "ADD_PRODUCT";
 
 //ACTION CREATOR
 export const _setProduct = (product) => {

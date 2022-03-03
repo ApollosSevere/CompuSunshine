@@ -21,7 +21,6 @@ export const fetchUsers = () => {
           },
         });
         const action = setUsers(data);
-        console.log(action);
         dispatch(action);
       }
     } catch (error) {

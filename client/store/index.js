@@ -1,30 +1,32 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+
 import auth from "./auth";
-import productsReducer from "./products";
-import productReducer from "./product";
+import userReducer from "./user";
 import cartReducer from "./cart";
-import adminProductsReducer from "./adminproducts";
 import usersReducer from "./users";
 import orderReducer from "./order";
 import ordersReducer from "./orders";
-import userReducer from "./user";
+import productReducer from "./product";
+import productsReducer from "./products";
+import adminProductsReducer from "./adminproducts";
 
 const reducer = combineReducers({
   auth,
-  products: productsReducer,
-  product: productReducer,
   cart: cartReducer,
-  adminproducts: adminProductsReducer,
+  user: userReducer,
   users: usersReducer,
   order: orderReducer,
   orders: ordersReducer,
-  user: userReducer,
+  product: productReducer,
+  products: productsReducer,
+  adminproducts: adminProductsReducer,
 });
+
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true })),
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 const store = createStore(reducer, middleware);
 

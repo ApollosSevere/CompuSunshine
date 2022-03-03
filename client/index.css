@@ -1,7 +1,6 @@
 body {
   margin: 0;
   font-family: "Josefin Sans", sans-serif;
-  /* font-family: 'Open Sans', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 17px;
@@ -36,18 +35,3 @@ select:focus,
 textarea:focus {
   outline: 0px;
 }
-/* .row,
-.col-6,
-.col-4 {
-  margin: 0;
-  padding: 0;
-} */
-
-/* For future use */
-/* element.style {
-  background: #e5fee9;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */

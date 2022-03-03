@@ -1,109 +1,140 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+
+// Modules/Libraries
 import { connect } from "react-redux";
-import { updateUser } from "../../../store/user";
+
+// Redux
 import { me } from "../../../store/auth";
+import { updateUser } from "../../../store/user";
 
-function AccountInfo({ toUpdateUser, refreshUser, auth }) {
-  const [formData, setFormData] = useState({});
-  const handleChange = ({ target }) => {
-    setFormData({ ...formData, [target.name]: target.value });
-  };
-
-  useEffect(() => {
-    try {
-      getSingleProduct(productId);
-    } catch (error) {
-      console.log(error);
-    }
-    return () => {
-      clearProduct();
+class AccountInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      first_name: "",
+      last_name: "",
+      email: "",
+      address_1: "",
+      address_2: "",
+      phone: "",
+      city: "",
+      state: "",
+      zipcode: "",
     };
-  }, []);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  const handleSubmit = (event) => {
+  componentDidMount() {
+    const user = this.props.auth;
+
+    this.setState({
+      first_name: user.first_name || "",
+      last_name: user.last_name || "",
+      email: user.email || "",
+      address_1: user.address_1 || "",
+      address_2: user.address_2 || "",
+      phone: user.phone || "",
+      city: user.city || "",
+      state: user.state || "",
+      zipcode: user.zipcode || "",
+    });
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  async handleSubmit(event) {
     try {
-      event.preventDefault();
-      toUpdateUser({ ...auth, ...formData });
-      refreshUser();
+      await event.preventDefault();
+      await this.props.toUpdateUser({ ...this.props.auth, ...this.state });
+      await this.props.refreshUser();
+      // await this.props.history.push("/myAccount");
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
-  return (
-    <>
-      <form onSubmit={this.handleSubmit} className="row form-container">
-        <div className="col-md-6">
-          <div className="form">
-            <label htmlFor="email">
-              <h1>Email:</h1>
-            </label>
-            <input
-              name="email"
-              onChange={this.handleChange}
-              value={email}
-              className="form-control"
-            ></input>
-          </div>
-        </div>
+  render() {
+    const {
+      first_name,
+      last_name,
+      email,
+      address_1,
+      address_2,
+      phone,
+      city,
+      state,
+      zipcode,
+    } = this.state;
 
-        <div className="col-md-6">
-          <div className="form">
-            <label htmlFor="city">
-              <h1>City:</h1>
-            </label>
-            <input
-              name="city"
-              onChange={this.handleChange}
-              value={city}
-              className="form-control"
-            ></input>
+    return (
+      <>
+        <form onSubmit={this.handleSubmit} className="row form-container">
+          <div className="col-md-6">
+            <div className="form">
+              <label htmlFor="email">
+                <h1>Email:</h1>
+              </label>
+              <input
+                name="email"
+                onChange={this.handleChange}
+                value={email}
+                className="form-control"
+              ></input>
+            </div>
           </div>
-        </div>
 
-        <div className="col-md-6">
-          <div className="form">
-            <label htmlFor="state">
-              <h1>State:</h1>
-            </label>
-            <input
-              name="state"
-              onChange={this.handleChange}
-              value={state}
-              className="form-control"
-            ></input>
+          <div className="col-md-6">
+            <div className="form">
+              <label htmlFor="city">
+                <h1>City:</h1>
+              </label>
+              <input
+                name="city"
+                onChange={this.handleChange}
+                value={city}
+                className="form-control"
+              ></input>
+            </div>
           </div>
-        </div>
 
-        <div className="col-md-6">
-          <div className="form">
-            <label htmlFor="phone">
-              <h1>Phone:</h1>
-            </label>
-            <input
-              name="phone"
-              onChange={this.handleChange}
-              value={phone}
-              className="form-control"
-            ></input>
+          <div className="col-md-6">
+            <div className="form">
+              <label htmlFor="state">
+                <h1>State:</h1>
+              </label>
+              <input
+                name="state"
+                onChange={this.handleChange}
+                value={state}
+                className="form-control"
+              ></input>
+            </div>
           </div>
-        </div>
-        <button type="submit">Update Profile</button>
-      </form>
-    </>
-  );
+
+          <div className="col-md-6">
+            <div className="form">
+              <label htmlFor="phone">
+                <h1>Phone:</h1>
+              </label>
+              <input
+                name="phone"
+                onChange={this.handleChange}
+                value={phone}
+                className="form-control"
+              ></input>
+            </div>
+          </div>
+          <button type="submit">Update Profile</button>
+        </form>
+      </>
+    );
+  }
 }
-// {
-//   first_name: "",
-//   last_name: "",
-//   email: "",
-//   address_1: "",
-//   address_2: "",
-//   phone: "",
-//   city: "",
-//   state: "",
-//   zipcode: "",
-// };
 
 const mapStateToProps = (state) => {
   return {
@@ -111,9 +142,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { history }) => ({
-  toUpdateUser: (user) => dispatch(updateUser(user)),
+const mapDispatchToProps = (dispatch) => ({
   refreshUser: () => dispatch(me()),
+  toUpdateUser: (user) => dispatch(updateUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountInfo);

@@ -41,42 +41,37 @@ function ShopSection({ getProducts, products }) {
                       }, 0) / validRatings.length || 0;
 
                     return (
-                      <>
-                        <div
-                          className="shop col-lg-4 col-md-6 col-sm-6"
-                          key={product.id}
-                        >
-                          <div className="border-product">
-                            <Link to={`/products/${product.id}`}>
-                              <div className="shopBack">
-                                <img
-                                  src={product.imageUrl}
-                                  alt={product.name}
-                                />
-                              </div>
-                            </Link>
-
-                            <div className="shoptext">
-                              <p>
-                                <Link to={`/products/${product.id}`}>
-                                  {product.name}
-                                </Link>
-                              </p>
-
-                              <h5>Brand: {product.brand}</h5>
-                              <h3>
-                                {product.quantity === 0 ? "Out of Stock!" : ""}
-                              </h3>
-
-                              <Rating
-                                value={ratingAverage}
-                                text={`${product.reviews.length} reviews`}
-                              />
-                              <h3>${product.price / 100}</h3>
+                      <div
+                        className="shop col-lg-4 col-md-6 col-sm-6"
+                        key={product.id}
+                      >
+                        <div className="border-product">
+                          <Link to={`/products/${product.id}`}>
+                            <div className="shopBack">
+                              <img src={product.imageUrl} alt={product.name} />
                             </div>
+                          </Link>
+
+                          <div className="shoptext">
+                            <p>
+                              <Link to={`/products/${product.id}`}>
+                                {product.name}
+                              </Link>
+                            </p>
+
+                            <h5>Brand: {product.brand}</h5>
+                            <h3>
+                              {product.quantity === 0 ? "Out of Stock!" : ""}
+                            </h3>
+
+                            <Rating
+                              value={ratingAverage}
+                              text={`${product.reviews.length} reviews`}
+                            />
+                            <h3>${product.price / 100}</h3>
                           </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })
                 ) : (

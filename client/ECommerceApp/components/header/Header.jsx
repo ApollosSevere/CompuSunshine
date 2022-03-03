@@ -58,7 +58,7 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <i class="fas fa-user"></i>
+                    <i className="fas fa-user"></i>
                   </button>
                   <div className="dropdown-menu">
                     {isLoggedIn ? (
@@ -81,13 +81,17 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                         <Link className="dropdown-item" to="/about">
                           About
                         </Link>
-                        <Link onClick={handleClick} className="dropdown-item">
+                        <Link
+                          to="#"
+                          onClick={handleClick}
+                          className="dropdown-item"
+                        >
                           Logout
                         </Link>
                       </>
                     ) : (
                       <>
-                        <Link className="dropdown-item" to="/login">
+                        <Link to="#" className="dropdown-item" to="/login">
                           Login
                         </Link>
                         <Link
@@ -186,7 +190,11 @@ const Header = ({ handleClick, isLoggedIn, isAdmin, user, canSearch }) => (
                       <Link className="dropdown-item" to="/myAccount">
                         Profile
                       </Link>
-                      <Link onClick={handleClick} className="dropdown-item">
+                      <Link
+                        to="#"
+                        onClick={handleClick}
+                        className="dropdown-item"
+                      >
                         Logout
                       </Link>
                       {isAdmin && (

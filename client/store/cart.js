@@ -1,10 +1,6 @@
 import axios from "axios";
 
 const LOAD_CART = "LOAD_CART";
-const ADD_QUANTITY_TO_CART = "ADD_QUANTITY_TO_CART";
-const SUBTRACT_QUANTITY_FROM_CART = "SUBTRACT_QUANTITY_FROM_CART";
-const DELETE_FROM_CART = "DELETE_FROM_CART";
-const ADD_TO_CART = "ADD_TO_CART";
 const LOAD_GUEST_CART = "LOAD_GUEST_CART";
 const ADD_INVENTORY_CONFLICT = "ADD_INVENTORY_CONFLICT";
 const CAN_SUBMIT = "CAN_SUBMIT";
@@ -136,7 +132,6 @@ export const addToUserCartFromGuest = (
 ) => {
   return async (dispatch) => {
     try {
-      console.log("adding");
       const obj = {
         productId,
         loggedInUser,
@@ -144,7 +139,6 @@ export const addToUserCartFromGuest = (
         productObj,
         addedFromGuestCart: true,
       };
-      console.log(obj.productId, loggedInUser, "should work");
       const { data: product } = await axios.post(
         `/api/cart/addFromGuestUserCart`,
         obj
@@ -202,7 +196,6 @@ export const addToGuestCart =
 
 export const remove_GuestCart = () => {
   return async (dispatch) => {
-    console.log("workindajflkadjsf lakjds");
     localStorage.removeItem("guestCartBuffer");
     dispatch(_removeGuestCart());
   };
@@ -229,7 +222,6 @@ export const fetch_GuestCartBuffer = () => {
         JSON.parse(localStorage.getItem("guestCartBuffer")) !== null
           ? JSON.parse(localStorage.getItem("guestCartBuffer"))
           : [];
-      console.log(cartItems, "this is what we get");
       dispatch(_loadGuestCartBuffer(cartItems));
     } catch (error) {
       console.log(error);
@@ -274,7 +266,6 @@ export const update_GuestCart = (itemId, task) => {
 export const checkInventory = (productId, cartItemAmount, cartItemId) => {
   return async (dispatch) => {
     try {
-      console.log("should be working");
       const obj = { cartItemAmount };
       const { data: canPurchase } = await axios.put(
         `/api/products/checkInventory/${productId}`,

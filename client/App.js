@@ -1,5 +1,9 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+
+// Modules/Libraries
+import { ToastContainer } from "react-toastify";
+
+// Components
 import Routes from "./Routes";
 
 const App = () => {

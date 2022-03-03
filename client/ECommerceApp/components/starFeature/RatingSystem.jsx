@@ -27,14 +27,14 @@ const RatingSystem = ({ NumOfStars, rating, setRating }) => {
     */
     return rating < star ? (
       hovered < star ? (
-        <i class="far fa-star "></i>
+        <i className="far fa-star "></i>
       ) : (
-        <i class="fas fa-star "></i>
+        <i className="fas fa-star "></i>
       )
     ) : hovered < star && hovered != 0 ? (
-      <i class="far fa-star"></i>
+      <i className="far fa-star"></i>
     ) : (
-      <i class="fas fa-star "></i>
+      <i className="fas fa-star "></i>
     );
   };
 

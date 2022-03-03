@@ -1,6 +1,12 @@
 import React from "react";
-import { Switch, Link } from "react-router-dom";
+
+// Modules/Libraries
+import { Switch } from "react-router-dom";
+
+// Utils
 import RouteWithSubRoutes from "../utils/RouteWithSubRoutes";
+
+// Components
 import Header from "./components/header/Header.jsx";
 
 function ECommerceApp({ routes }) {

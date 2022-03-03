@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { fetchProduct, addReview } from "../../../store/product";
-import { Link, useParams } from "react-router-dom";
-import { addToGuestCart, addToUserCart } from "../../../store/cart";
-import { injectStyle } from "react-toastify/dist/inject-style";
 import "./singleProduct.css";
-import RatingSystem from "../../components/starFeature/RatingSystem.jsx";
+
+// Modules/Libraries
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import { Link, useParams } from "react-router-dom";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
-import Rating from "../../components/homeComponents/rating/Rating.jsx";
+// Redux
+import { fetchProduct, addReview } from "../../../store/product";
+import { addToGuestCart, addToUserCart } from "../../../store/cart";
+
+// Components
 import Message from "../../components/LoadingError/Error";
-
-// import Header from "../../components/Header/Header.jsx";
+import Rating from "../../components/homeComponents/rating/Rating.jsx";
+import RatingSystem from "../../components/starFeature/RatingSystem.jsx";
 
 const SingleProduct = ({
+  product,
+  add_Review,
+  getProduct,
   isLoggedIn,
   loggedInUser,
-  product,
-  getProduct,
   add_UserProduct,
   add_GuestProduct,
-  add_Review,
 }) => {
-  const [rating, setRating] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [comment, setComment] = useState("");
   const { productId } = useParams();
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
   const validRatings =
     (product.reviews && product.reviews.filter((v) => v.rating != 0)) || [];
@@ -34,10 +37,6 @@ const SingleProduct = ({
     validRatings.reduce((acc, b) => {
       return acc + Number(b.rating);
     }, 0) / validRatings.length || 0;
-
-  // const handleComment = ({ target }) => {
-  //   setComment({ ...formData, [target.name]: target.value });
-  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,19 +94,6 @@ const SingleProduct = ({
 
   return (
     <>
-      {/* <Header /> */}
-      {/* <img src={product.imageUrl} />
-      <h3>{product.name}</h3>
-      <h4>${product.price / 100}</h4>
-      <h5>{product.brand}</h5>
-      <h5>{product.category}</h5>
-      <p>{product.description}</p>
-      {product.quantity !== 0 ? (
-        <button onClick={handleClick}>Add to Cart</button>
-      ) : (
-        "Out of Stock!"
-      )} */}
-
       <div className="container single-product">
         <div className="row">
           <div className="col-md-6">
@@ -202,7 +188,7 @@ const SingleProduct = ({
                           review.createdAt
                         ).toLocaleTimeString("en-US");
                         return (
-                          <>
+                          <div key={review.id}>
                             <strong>@{review.user.username}</strong>
                             <Rating value={review.rating} />
                             <span>{date.split(" ").splice(1).join(" ")}</span>
@@ -213,7 +199,7 @@ const SingleProduct = ({
                               {review.comment}
                             </div>
                             {product.reviews.length > 1 && <hr />}
-                          </>
+                          </div>
                         );
                       })}
                   </div>
@@ -221,8 +207,8 @@ const SingleProduct = ({
               )
             ) : (
               <>
-                <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                <span class="sr-only">Loading...</span>
+                <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <span className="sr-only">Loading...</span>
               </>
             )}
           </div>
@@ -275,20 +261,21 @@ const SingleProduct = ({
 };
 
 const mapState = (state) => ({
+  user: state.auth,
   product: state.product,
   isLoggedIn: !!state.auth.id,
   loggedInUser: state.auth.id,
-  user: state.auth,
 });
 
 const mapDispatch = (dispatch) => ({
   getProduct: (id) => dispatch(fetchProduct(id)),
+  add_Review: (review) => dispatch(addReview(review)),
+  add_GuestProduct: (product) => dispatch(addToGuestCart(product)),
+
   add_UserProduct: (name, id, loggedInUser, price, productObj, quantity) =>
     dispatch(
       addToUserCart(name, id, loggedInUser, price, productObj, quantity)
     ),
-  add_GuestProduct: (product) => dispatch(addToGuestCart(product)),
-  add_Review: (review) => dispatch(addReview(review)),
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);

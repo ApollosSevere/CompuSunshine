@@ -1,25 +1,31 @@
 import React, { useEffect } from "react";
+
+// Modules/Libraries
 import { connect } from "react-redux";
-import RouteWithSubRoutes from "./utils/RouteWithSubRoutes.js";
 import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
 
+// Utils
+import NotFound from "./utils/NotFound.js";
+import RouteWithSubRoutes from "./utils/RouteWithSubRoutes.js";
+
+// Redux
 import { me } from "./store";
 
-import ECommerceApp from "./ECommerceApp/ECommerceApp.js";
-import { Login, Signup } from "./ECommerceApp/Pages/authForm/AuthForm.jsx";
+// E-Commerce App Components
 import Home from "./ECommerceApp/Pages/home/Home.jsx";
-import SingleProduct from "./ECommerceApp/Pages/singleProduct/SingleProduct.jsx";
 import Cart from "./ECommerceApp/Pages/cart/Cart.jsx";
+import ECommerceApp from "./ECommerceApp/ECommerceApp.js";
 import Checkout from "./ECommerceApp/Pages/checkout/Checkout.js";
 import MyAccount from "./ECommerceApp/Pages/profile/MyAccount.js";
+import { Login, Signup } from "./ECommerceApp/Pages/authForm/AuthForm.jsx";
+import SingleProduct from "./ECommerceApp/Pages/singleProduct/SingleProduct.jsx";
 
+// E-Commerce App Components
 import AdminApp from "./AdminApp/AdminApp.js";
-import AdminProducts from "./AdminApp/pages/adminProducts/AdminProducts.js";
 import AdminUsers from "./AdminApp/pages/users/AdminUsers.js";
-import CreateProduct from "./AdminApp/pages/createProduct/CreateProduct";
 import EditProduct from "./AdminApp/pages/editProduct/EditProduct.js";
-
-import NotFound from "./utils/NotFound.js";
+import CreateProduct from "./AdminApp/pages/createProduct/CreateProduct";
+import AdminProducts from "./AdminApp/pages/adminProducts/AdminProducts.js";
 
 const Routes = ({ loadInitialData, isAdmin, isLoggedIn }) => {
   const dynamicRoutes = !isLoggedIn

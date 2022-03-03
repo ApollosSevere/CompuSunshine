@@ -42,7 +42,7 @@ function Checkout({
 }) {
   const { values } = useForm();
   const [formData, setFormData] = useState(auth);
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(1);
   let cart = cartInfo ? (auth.id ? cartInfo.userCart : cartInfo.guestCart) : [];
 
   let iconWidth = {
@@ -84,7 +84,7 @@ function Checkout({
     getCart(auth.id);
     getGuestCart();
     if (auth.id) getOrder(auth.id);
-  }, [auth, window.innerWidth]);
+  }, [auth]);
 
   const handleSubmit = () => {
     injectStyle();
@@ -146,7 +146,7 @@ function Checkout({
             <div className="row ">
               <div className="col-md-4 check-Icon">
                 <div className="alert-success order-box">
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </div>
               </div>
               <div className="col-md-8 checkout-infoBox">
@@ -204,7 +204,7 @@ function Checkout({
               style={{
                 left: iconWidth[currentStep],
               }}
-              class="fa fa-shopping-cart icon-cart"
+              className="fa fa-shopping-cart icon-cart"
             ></i>
           </div>
         </div>
@@ -314,10 +314,10 @@ function Checkout({
             <div className="col-lg-8">
               {auth.id
                 ? cartInfo.userCart.map((product) => (
-                    <CheckoutItem product={product} />
+                    <CheckoutItem key={product.id} product={product} />
                   ))
                 : cartInfo.guestCart.map((product) => (
-                    <CheckoutItem product={product} />
+                    <CheckoutItem key={product.id} product={product} />
                   ))}
             </div>
 
