@@ -8,6 +8,13 @@ import { Link } from "react-router-dom";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
 // Redux
+import {
+  fetchCart,
+  checkInventory,
+  resetCanSubmit,
+  fetch_GuestCart,
+  resetCartConflicts,
+} from "../../../store/cart";
 import { updateProductCount } from "../../../store/products";
 import { updateOrder, fetchOrder } from "../../../store/order";
 
@@ -15,14 +22,6 @@ import { updateOrder, fetchOrder } from "../../../store/order";
 import CheckoutItem from "../../components/utils/CheckoutItem";
 import useForm from "../../components/creditCard/utils/useForm";
 import CreditCardForm from "../../components/creditCard/CreditCardForm.jsx";
-
-import {
-  checkInventory,
-  resetCanSubmit,
-  resetCartConflicts,
-  fetchCart,
-  fetch_GuestCart,
-} from "../../../store/cart";
 
 function Checkout({
   auth,

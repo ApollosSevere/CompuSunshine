@@ -179,6 +179,7 @@ export const addToGuestCart =
       }
     });
 
+    // Create new cart item if cart empty
     if (itemInCart.length === 0) {
       const newItem = {
         id,
@@ -267,7 +268,7 @@ export const checkInventory = (productId, cartItemAmount, cartItemId) => {
   return async (dispatch) => {
     try {
       const obj = { cartItemAmount };
-      const { data: canPurchase } = await axios.put(
+      const { data: canPurchase } = await axios.get(
         `/api/products/checkInventory/${productId}`,
         obj
       );
@@ -337,15 +338,3 @@ export default function cartReducer(state = initialState, action) {
       return state;
   }
 }
-
-// let initialFormState = {
-//   first_name: auth.first_name || "",
-//   last_name: auth.last_name || "",
-//   email: auth.email || "",
-//   address_1: auth.address_1 || "",
-//   address_2: auth.address_2 || "",
-//   phone: auth.phone || "",
-//   city: auth.city || "",
-//   state: auth.state || "",
-//   zipcode: auth.zipcode || "",
-// };

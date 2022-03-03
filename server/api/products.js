@@ -54,7 +54,7 @@ router.post("/review", async (req, res, next) => {
   }
 });
 
-router.put("/checkInventory/:productId", async (req, res, next) => {
+router.get("/checkInventory/:productId", async (req, res, next) => {
   try {
     let canPurchase = false;
     const { cartItemAmount } = req.body;
