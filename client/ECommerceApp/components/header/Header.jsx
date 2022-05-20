@@ -111,7 +111,7 @@ const Header = ({
                         </>
                       ) : (
                         <>
-                          <Link to="#" className="dropdown-item" to="/login">
+                          <Link className="dropdown-item" to="/login">
                             Login
                           </Link>
                           <Link

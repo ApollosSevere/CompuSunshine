@@ -4,7 +4,7 @@ import axios from "axios";
 const UPDATE_USER = "UPDATE_USER";
 
 //ACTION CREATOR
-export const _updateUser = user => {
+export const _updateUser = (user) => {
   return {
     type: UPDATE_USER,
     user,
@@ -12,8 +12,8 @@ export const _updateUser = user => {
 };
 
 //THUNK
-export const updateUser = user => {
-  return async dispatch => {
+export const updateUser = (user) => {
+  return async (dispatch) => {
     try {
       const { data: updated } = await axios.put(`/api/user/${user.id}`, user);
       dispatch(_updateUser(updated));
